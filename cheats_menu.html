@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ CHEAT CODES — Study Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   ROOT
+══════════════════════════════════════ */
+:root {
+  --void:#040508; --deep:#07090f; --surface:#0c0f1a; --surface2:#111522;
+  --surface3:#161c2e; --panel:#0a0d18; --border:#1a2240; --border2:#243060;
+  --cyan:#00e5ff; --cyan2:#00b8d4; --cdim:rgba(0,229,255,0.07);
+  --magenta:#ff007a; --mdim:rgba(255,0,122,0.08);
+  --green:#00ff88; --gdim:rgba(0,255,136,0.07);
+  --amber:#ffaa00; --adim:rgba(255,170,0,0.08);
+  --violet:#9b5cf6; --vdim:rgba(155,92,246,0.1);
+  --red:#ff4455; --rdim:rgba(255,68,85,0.09);
+  --text:#c8d8f0; --text2:#6b80a8; --text3:#2e3d5a;
+  --r:8px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  background:var(--void);color:var(--text);
+  font-family:'Rajdhani',sans-serif;font-size:14px;
+  display:flex;flex-direction:column;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 45% at 15% 40%,rgba(0,229,255,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 60% at 85% 70%,rgba(155,92,246,0.05) 0%,transparent 55%),
+    radial-gradient(ellipse 40% 35% at 50% 10%,rgba(255,0,122,0.03) 0%,transparent 55%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.07) 3px,rgba(0,0,0,0.07) 4px);
+}
+.scanline{position:fixed;top:0;left:0;right:0;height:2px;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,0.1),transparent);
+  animation:sl 11s linear infinite;}
+@keyframes sl{from{transform:translateY(-2px)}to{transform:translateY(100vh)}}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--void);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* ══════════════════════════════════════
+   TOPBAR
+══════════════════════════════════════ */
+#topbar{
+  position:relative;z-index:100;height:50px;
+  background:var(--surface);border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0;
+  box-shadow:0 2px 24px rgba(0,0,0,0.6);
+}
+#topbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--magenta),var(--cyan),transparent);opacity:0.35;}
+
+.brand{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;
+  letter-spacing:0.06em;flex-shrink:0;
+  background:linear-gradient(135deg,var(--cyan),var(--magenta));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.tb-sep{width:1px;height:22px;background:var(--border2);flex-shrink:0;}
+.tb-tag{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.15em;flex-shrink:0;}
+.tb-link{
+  display:flex;align-items:center;gap:5px;padding:0 12px;height:28px;
+  border-radius:5px;border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text2);font-family:'Orbitron',monospace;font-size:0.52rem;
+  font-weight:700;letter-spacing:0.1em;cursor:pointer;transition:all 0.14s;
+  text-decoration:none;flex-shrink:0;white-space:nowrap;
+}
+.tb-link:hover{border-color:rgba(0,229,255,0.35);color:var(--cyan);background:var(--cdim);}
+#tb-clock{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);margin-left:auto;flex-shrink:0;}
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+#layout{position:relative;z-index:2;flex:1;display:flex;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:200px;flex-shrink:0;background:var(--panel);
+  border-right:1px solid var(--border2);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+#sidebar::before{content:'';position:absolute;top:50px;left:0;width:200px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);opacity:0.25;}
+
+.sb-section{padding:10px 10px 4px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;color:var(--text3);text-transform:uppercase;flex-shrink:0;}
+.sb-scroll{flex:1;overflow-y:auto;padding:4px 8px 12px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+
+.nav-btn{
+  display:flex;align-items:center;gap:9px;width:100%;
+  padding:8px 9px;border-radius:7px;border:none;
+  background:transparent;color:var(--text2);
+  font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:500;
+  cursor:pointer;transition:all 0.13s;text-align:left;margin-bottom:2px;
+  position:relative;
+}
+.nav-btn:hover{background:var(--surface2);color:var(--text);}
+.nav-btn.active{background:var(--surface3);color:var(--text);font-weight:600;}
+.nav-btn.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:2px;border-radius:2px;background:var(--nb-color,var(--cyan));}
+.nb-icon{font-size:1rem;flex-shrink:0;width:20px;text-align:center;}
+.nb-badge{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.52rem;padding:1px 6px;border-radius:10px;background:var(--surface);color:var(--text3);border:1px solid var(--border);}
+
+/* ══════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════ */
+#content{flex:1;overflow-y:auto;padding:22px 24px 60px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+
+.view{display:none;}
+.view.active{display:block;animation:fadeUp 0.28s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Panel header */
+.ph{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.ph-icon{font-size:1.8rem;flex-shrink:0;}
+.ph-title{font-family:'Orbitron',monospace;font-size:1.3rem;font-weight:700;letter-spacing:-0.01em;}
+.ph-sub{font-size:0.8rem;color:var(--text2);margin-top:3px;}
+.ph-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);}
+
+/* Section label */
+.sl{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:var(--text3);text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:10px;}
+.sl::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Card grid */
+.grid{display:grid;gap:12px;}
+.g2{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}
+.g3{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.gfull{grid-template-columns:1fr;}
+
+/* Card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color 0.18s,box-shadow 0.18s;}
+.card:hover{border-color:var(--border2);box-shadow:0 4px 24px rgba(0,0,0,0.4);}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:11px 14px 9px;border-bottom:1px solid var(--border);}
+.ct{font-family:'Orbitron',monospace;font-size:0.78rem;font-weight:700;color:var(--text);}
+.cbadge{font-family:'Share Tech Mono',monospace;font-size:0.55rem;padding:2px 8px;border-radius:3px;letter-spacing:0.06em;}
+.cb{padding:13px 14px;}
+
+/* Formula list */
+.fl{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fi{display:flex;flex-direction:column;gap:3px;}
+.fn{font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--text3);text-transform:uppercase;}
+.fe{font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--text);background:var(--surface2);padding:6px 10px;border-radius:5px;border-left:2px solid var(--border2);word-break:break-word;}
+.fe.hl{border-left-color:var(--cyan);color:var(--cyan);}
+.fnote{font-size:0.7rem;color:var(--text2);font-style:italic;}
+
+/* Rule list */
+.rl{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.ri{font-size:0.84rem;color:var(--text2);line-height:1.6;padding:8px 11px;background:var(--surface2);border-left:2px solid var(--border2);border-radius:0 5px 5px 0;}
+.ri strong{color:var(--text);}
+
+/* Vocab grid */
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.vi{background:var(--surface2);border-radius:5px;padding:8px 10px;}
+.vt{font-family:'Share Tech Mono',monospace;font-size:0.7rem;font-weight:500;margin-bottom:2px;}
+.vd{font-size:0.76rem;color:var(--text2);line-height:1.45;}
+
+/* Table */
+.rt{width:100%;border-collapse:collapse;font-size:0.8rem;}
+.rt th{background:var(--surface2);padding:8px 12px;text-align:left;font-family:'Share Tech Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--text3);border-bottom:1px solid var(--border);}
+.rt td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2);line-height:1.5;}
+.rt tr:last-child td{border-bottom:none;}
+.rt tr:hover td{background:var(--surface2);}
+
+/* ══════════════════════════════════════
+   CALCULATORS
+══════════════════════════════════════ */
+.calc-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px;}
+.ctab{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'Orbitron',monospace;font-size:0.52rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.13s;white-space:nowrap;}
+.ctab:hover{border-color:var(--border2);color:var(--text2);}
+.ctab.active{background:var(--cdim);border-color:var(--cyan);color:var(--cyan);}
+
+.calc-view{display:none;}
+.calc-view.active{display:block;}
+
+/* Calculator display */
+.cd{background:var(--deep);border:1px solid var(--border2);border-radius:8px;padding:12px 16px 10px;margin-bottom:10px;text-align:right;min-height:65px;}
+.cd-expr{font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--text3);min-height:16px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cd-val{font-family:'Share Tech Mono',monospace;font-size:1.9rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Calculator buttons */
+.cg{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
+.cg5{grid-template-columns:repeat(5,1fr);}
+.cg6{grid-template-columns:repeat(6,1fr);}
+.cb2{grid-column:span 2;}
+.cbtn{padding:13px 6px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.1s;}
+.cbtn:hover{background:var(--border);transform:scale(0.97);}
+.cbtn:active{transform:scale(0.93);}
+.cbtn.fn{background:var(--adim);border-color:rgba(255,170,0,0.2);color:var(--amber);font-size:0.7rem;padding:11px 4px;}
+.cbtn.fn:hover{background:rgba(255,170,0,0.14);}
+.cbtn.op{background:var(--cdim);border-color:rgba(0,229,255,0.2);color:var(--cyan);}
+.cbtn.op:hover{background:rgba(0,229,255,0.14);}
+.cbtn.eq{background:var(--cyan);border-color:var(--cyan);color:var(--void);font-size:1rem;font-weight:700;}
+.cbtn.eq:hover{background:var(--cyan2);}
+
+/* Special input calculators */
+.inp-calc{display:flex;flex-direction:column;gap:10px;}
+.ic-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.ic-label{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);min-width:80px;flex-shrink:0;}
+.ic-in{flex:1;min-width:80px;height:34px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:0.85rem;padding:0 10px;outline:none;}
+.ic-in:focus{border-color:var(--cyan);}
+.ic-in::placeholder{color:var(--text3);}
+.ic-sel{flex:1;min-width:100px;height:34px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;color:var(--text2);font-family:'Rajdhani',sans-serif;font-size:0.85rem;padding:0 8px;outline:none;cursor:pointer;}
+.ic-btn{padding:0 18px;height:34px;border-radius:6px;border:1px solid rgba(0,229,255,0.3);background:var(--cdim);color:var(--cyan);font-family:'Orbitron',monospace;font-size:0.56rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.14s;white-space:nowrap;}
+.ic-btn:hover{background:rgba(0,229,255,0.14);box-shadow:0 0 12px rgba(0,229,255,0.2);}
+.ic-result{background:var(--surface2);border:1px solid var(--border2);border-left:3px solid var(--cyan);border-radius:0 6px 6px 0;padding:10px 14px;font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:var(--green);min-height:40px;line-height:1.65;white-space:pre-wrap;}
+.ic-result.empty{color:var(--text3);}
+
+/* ══════════════════════════════════════
+   QUIZ ENGINE
+══════════════════════════════════════ */
+.quiz-area{max-width:680px;}
+.quiz-sel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:20px;}
+.qs-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 14px;cursor:pointer;transition:all 0.16s;text-align:center;}
+.qs-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
+.qs-icon{font-size:1.8rem;margin-bottom:7px;}
+.qs-name{font-family:'Orbitron',monospace;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;color:var(--text);}
+.qs-count{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);margin-top:3px;}
+
+.quiz-active-area{display:none;}
+.quiz-active-area.show{display:block;}
+
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;}
+.qnum{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:0.1em;margin-bottom:10px;}
+.qtext{font-size:1rem;color:var(--text);font-weight:600;line-height:1.5;margin-bottom:18px;}
+.qopts{display:flex;flex-direction:column;gap:7px;}
+.qopt{padding:10px 14px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-family:'Rajdhani',sans-serif;font-size:0.9rem;cursor:pointer;transition:all 0.13s;text-align:left;}
+.qopt:hover:not(:disabled){border-color:var(--border2);color:var(--text);background:var(--surface3);}
+.qopt.correct{background:rgba(0,255,136,0.1);border-color:rgba(0,255,136,0.4);color:var(--green);}
+.qopt.wrong{background:rgba(255,68,85,0.09);border-color:rgba(255,68,85,0.35);color:var(--red);}
+.qopt:disabled{cursor:default;}
+.qfb{margin-top:12px;padding:9px 13px;border-radius:7px;font-size:0.83rem;line-height:1.55;}
+.qfb.ok{background:rgba(0,255,136,0.07);color:var(--green);}
+.qfb.bad{background:rgba(255,68,85,0.07);color:var(--red);}
+.qnext{margin-top:12px;padding:8px 20px;border-radius:7px;background:var(--cyan);border:none;color:var(--void);font-family:'Orbitron',monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:background 0.13s;}
+.qnext:hover{background:var(--cyan2);}
+.qscore{text-align:center;padding:24px;font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;}
+.qscore span{color:var(--green);}
+.quiz-back{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:'Orbitron',monospace;font-size:0.55rem;font-weight:700;cursor:pointer;transition:all 0.13s;margin-bottom:16px;}
+.quiz-back:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cdim);}
+.qprogbar{height:3px;background:var(--border);border-radius:2px;margin-bottom:16px;overflow:hidden;}
+.qproginner{height:100%;background:linear-gradient(90deg,var(--cyan),var(--magenta));border-radius:2px;transition:width 0.3s;}
+
+/* ══════════════════════════════════════
+   FACTS
+══════════════════════════════════════ */
+.facts-filter{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:18px;}
+.ff-btn{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:0.62rem;cursor:pointer;transition:all 0.13s;letter-spacing:0.06em;}
+.ff-btn:hover{border-color:var(--border2);color:var(--text2);}
+.ff-btn.active{background:var(--cdim);border-color:var(--cyan);color:var(--cyan);}
+
+.facts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+.fact-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 15px;transition:all 0.15s;}
+.fact-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.fc-cat{font-family:'Share Tech Mono',monospace;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.fc-text{font-size:0.88rem;color:var(--text);line-height:1.6;}
+.fc-src{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:var(--text3);margin-top:6px;}
+
+/* ══════════════════════════════════════
+   AI ASSISTANT
+══════════════════════════════════════ */
+#ai-view{display:flex;flex-direction:column;height:calc(100vh - 50px - 22px - 60px);}
+.ai-header-row{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.ai-status{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--green);}
+.ai-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+.ai-subject-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;flex-shrink:0;}
+.asbtn{padding:5px 12px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;cursor:pointer;transition:all 0.13s;letter-spacing:0.06em;white-space:nowrap;}
+.asbtn:hover{border-color:var(--border2);color:var(--text2);}
+.asbtn.active{border-color:var(--cyan);color:var(--cyan);background:var(--cdim);}
+
+.ai-msgs{
+  flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px;
+  padding:4px 2px 8px;scrollbar-width:thin;scrollbar-color:var(--border2) transparent;
+  min-height:0;
+}
+.msg{max-width:88%;display:flex;flex-direction:column;gap:4px;}
+.msg.user{align-self:flex-end;align-items:flex-end;}
+.msg.ai{align-self:flex-start;align-items:flex-start;}
+.msg-label{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.08em;}
+.msg-bubble{
+  padding:11px 14px;border-radius:10px;font-size:0.88rem;line-height:1.7;
+  max-width:100%;word-break:break-word;
+}
+.msg.user .msg-bubble{background:var(--cdim);border:1px solid rgba(0,229,255,0.2);color:var(--text);}
+.msg.ai .msg-bubble{background:var(--surface2);border:1px solid var(--border2);color:var(--text);}
+.msg.ai .msg-bubble code{background:var(--surface);padding:1px 6px;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--cyan);}
+.msg.ai .msg-bubble pre{background:var(--deep);border:1px solid var(--border2);border-radius:6px;padding:10px 12px;overflow-x:auto;margin:6px 0;}
+.msg.ai .msg-bubble pre code{background:transparent;padding:0;color:var(--green);}
+.msg.ai .msg-bubble strong{color:var(--amber);}
+.msg.ai .msg-bubble em{color:var(--violet);}
+.typing-indicator{display:flex;align-items:center;gap:5px;padding:10px 14px;}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:td 1.2s ease infinite;}
+.typing-dot:nth-child(2){animation-delay:0.2s;}
+.typing-dot:nth-child(3){animation-delay:0.4s;}
+@keyframes td{0%,80%,100%{transform:scale(0.6);opacity:0.4}40%{transform:scale(1);opacity:1}}
+
+.ai-input-area{flex-shrink:0;display:flex;gap:8px;align-items:flex-end;margin-top:10px;}
+.ai-textarea{
+  flex:1;min-height:44px;max-height:120px;
+  background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
+  color:var(--text);font-family:'Rajdhani',sans-serif;font-size:0.95rem;
+  padding:10px 12px;outline:none;resize:none;
+  transition:border-color 0.15s;line-height:1.5;
+}
+.ai-textarea:focus{border-color:var(--cyan);}
+.ai-textarea::placeholder{color:var(--text3);}
+.ai-send{
+  width:44px;height:44px;border-radius:8px;flex-shrink:0;
+  background:var(--cyan);border:none;color:var(--void);
+  font-size:1.1rem;cursor:pointer;transition:all 0.14s;
+  display:flex;align-items:center;justify-content:center;
+}
+.ai-send:hover{background:var(--cyan2);box-shadow:0 0 16px rgba(0,229,255,0.3);}
+.ai-send:disabled{background:var(--border2);color:var(--text3);cursor:not-allowed;}
+
+.ai-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;flex-shrink:0;}
+.ai-sug{padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:0.75rem;cursor:pointer;transition:all 0.12s;}
+.ai-sug:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cdim);}
+
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+#toast{position:fixed;bottom:18px;right:18px;z-index:500;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-left:3px solid var(--cyan);border-radius:8px;
+  padding:9px 15px;font-family:'Share Tech Mono',monospace;
+  font-size:0.7rem;color:var(--text2);
+  transform:translateY(50px);opacity:0;pointer-events:none;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);}
+#toast.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div id="toast"></div>
+
+<!-- ══════ TOPBAR ══════ -->
+<div id="topbar">
+  <span class="brand">⚡ CHEAT CODES</span>
+  <div class="tb-sep"></div>
+  <span class="tb-tag">// STUDY COMMAND CENTER //</span>
+  <a class="tb-link" href="index.html">◀ PORTAL</a>
+  <a class="tb-link" href="browser_home.html">⬡ NEXUS</a>
+  <div id="tb-clock"></div>
+</div>
+
+<!-- ══════ LAYOUT ══════ -->
+<div id="layout">
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sb-section">// Navigation</div>
+  <div class="sb-scroll">
+    <button class="nav-btn active" style="--nb-color:var(--cyan)" onclick="nav('ai')"><span class="nb-icon">🤖</span>AI Solver<span class="nb-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">NEW</span></button>
+    <button class="nav-btn" style="--nb-color:var(--amber)" onclick="nav('calc')"><span class="nb-icon">🧮</span>Calculators</button>
+    <button class="nav-btn" style="--nb-color:var(--green)" onclick="nav('sheets')"><span class="nb-icon">📋</span>Cheat Sheets</button>
+    <button class="nav-btn" style="--nb-color:var(--magenta)" onclick="nav('quiz')"><span class="nb-icon">❓</span>Quizzes</button>
+    <button class="nav-btn" style="--nb-color:var(--violet)" onclick="nav('facts')"><span class="nb-icon">💡</span>Did You Know</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+<!-- ════════════════════════
+     AI SOLVER VIEW
+════════════════════════ -->
+<div class="view active" id="view-ai">
+  <div class="ai-header-row">
+    <span class="ph-icon">🤖</span>
+    <div>
+      <div class="ph-title" style="color:var(--cyan)">ORACLE AI Solver</div>
+      <div class="ph-sub">Powered by Claude — solves Math, ELA, Science, Calc, Biology, Chemistry, History &amp; more</div>
+    </div>
+    <div class="ph-line"></div>
+    <div class="ai-status"><div class="ai-dot"></div>ONLINE</div>
+  </div>
+
+  <div id="ai-view">
+    <div class="ai-subject-row" id="subj-row">
+      <button class="asbtn active" data-ctx="You are ORACLE, an expert academic tutor. Answer clearly with step-by-step explanations, formulas, and examples. Format nicely using bold for key terms." onclick="setSubject(this,'general')">All Subjects</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert math tutor. Show every step clearly. Use proper notation. Explain the why behind each step." onclick="setSubject(this,'math')">📐 Math</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert ELA and writing tutor. Help with grammar, essays, literary analysis, rhetoric, and citations." onclick="setSubject(this,'ela')">✏️ ELA</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert science tutor covering physics, chemistry, biology, and earth science. Give clear explanations with examples." onclick="setSubject(this,'sci')">🔬 Science</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert calculus tutor. Show every step of derivatives, integrals, and limits. Use proper notation." onclick="setSubject(this,'calc')">∫ Calc</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert biology tutor. Cover cells, genetics, ecology, evolution, anatomy, and molecular biology." onclick="setSubject(this,'bio')">🧬 Biology</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert chemistry tutor. Cover stoichiometry, bonding, periodic trends, reactions, thermodynamics, and lab skills." onclick="setSubject(this,'chem')">⚗️ Chemistry</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert history and social studies tutor. Cover world history, US history, geography, civics, and economics." onclick="setSubject(this,'hist')">🌍 History</button>
+      <button class="asbtn" data-ctx="You are ORACLE, an expert computer science tutor. Cover algorithms, data structures, Python, Java, web development, and theory." onclick="setSubject(this,'cs')">💻 CS</button>
+    </div>
+
+    <div class="ai-suggestions" id="ai-sugs">
+      <button class="ai-sug" onclick="fillSug(this)">Solve: 2x² - 5x + 3 = 0</button>
+      <button class="ai-sug" onclick="fillSug(this)">Explain the water cycle</button>
+      <button class="ai-sug" onclick="fillSug(this)">Analyze rhetorical devices</button>
+      <button class="ai-sug" onclick="fillSug(this)">Derivative of x³sin(x)</button>
+      <button class="ai-sug" onclick="fillSug(this)">Mole conversions explained</button>
+      <button class="ai-sug" onclick="fillSug(this)">Causes of WWI</button>
+    </div>
+
+    <div class="ai-msgs" id="ai-msgs">
+      <div class="msg ai">
+        <div class="msg-label">ORACLE // READY</div>
+        <div class="msg-bubble">Hey! I'm <strong>ORACLE</strong> — your AI study assistant. I can solve and explain problems across every subject:<br><br>
+• <strong>Math</strong> — algebra, geometry, trig, statistics<br>
+• <strong>Calculus</strong> — derivatives, integrals, limits<br>
+• <strong>Science</strong> — physics, chemistry, biology, earth science<br>
+• <strong>ELA</strong> — essays, grammar, literary analysis, citations<br>
+• <strong>History</strong> — any era, any region<br>
+• <strong>CS</strong> — code, algorithms, data structures<br><br>
+Ask me anything — paste a question, problem, or concept. I'll break it down step by step. 🚀</div>
+      </div>
+    </div>
+
+    <div class="ai-input-area">
+      <textarea class="ai-textarea" id="ai-input" placeholder="Ask anything… paste a problem, question, or concept" rows="1"></textarea>
+      <button class="ai-send" id="ai-send-btn" onclick="sendMessage()">▶</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+     CALCULATORS VIEW
+════════════════════════ -->
+<div class="view" id="view-calc">
+  <div class="ph">
+    <span class="ph-icon">🧮</span>
+    <div><div class="ph-title" style="color:var(--amber)">Calculators</div><div class="ph-sub">Standard · Scientific · Algebra · Statistics · Unit Converter · Quadratic · Grade</div></div>
+    <div class="ph-line"></div>
+  </div>
+
+  <div class="calc-tabs">
+    <button class="ctab active" onclick="switchCalc('std',this)">Standard</button>
+    <button class="ctab" onclick="switchCalc('sci',this)">Scientific</button>
+    <button class="ctab" onclick="switchCalc('alg',this)">Algebra Solver</button>
+    <button class="ctab" onclick="switchCalc('stat',this)">Statistics</button>
+    <button class="ctab" onclick="switchCalc('conv',this)">Unit Converter</button>
+    <button class="ctab" onclick="switchCalc('quad',this)">Quadratic</button>
+    <button class="ctab" onclick="switchCalc('grade',this)">Grade Calc</button>
+    <button class="ctab" onclick="switchCalc('tip',this)">Tip / Tax</button>
+  </div>
+
+  <!-- STANDARD -->
+  <div class="calc-view active" id="cv-std">
+    <div class="grid g2"><div class="card"><div class="ch"><span class="ct">Standard Calculator</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">BASIC</span></div>
+    <div class="cb">
+      <div class="cd"><div class="cd-expr" id="se"></div><div class="cd-val" id="sv">0</div></div>
+      <div class="cg">
+        <button class="cbtn cb2 fn" onclick="cs('AC')">AC</button>
+        <button class="cbtn fn" onclick="cs('±')">±</button>
+        <button class="cbtn op" onclick="cs('÷')">÷</button>
+        <button class="cbtn" onclick="cs('7')">7</button><button class="cbtn" onclick="cs('8')">8</button><button class="cbtn" onclick="cs('9')">9</button>
+        <button class="cbtn op" onclick="cs('×')">×</button>
+        <button class="cbtn" onclick="cs('4')">4</button><button class="cbtn" onclick="cs('5')">5</button><button class="cbtn" onclick="cs('6')">6</button>
+        <button class="cbtn op" onclick="cs('−')">−</button>
+        <button class="cbtn" onclick="cs('1')">1</button><button class="cbtn" onclick="cs('2')">2</button><button class="cbtn" onclick="cs('3')">3</button>
+        <button class="cbtn op" onclick="cs('+')">+</button>
+        <button class="cbtn cb2" onclick="cs('0')">0</button>
+        <button class="cbtn" onclick="cs('.')">.</button>
+        <button class="cbtn eq" onclick="cs('=')">=</button>
+      </div>
+    </div></div></div>
+  </div>
+
+  <!-- SCIENTIFIC -->
+  <div class="calc-view" id="cv-sci">
+    <div class="card"><div class="ch"><span class="ct">Scientific Calculator</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">SCI</span></div>
+    <div class="cb">
+      <div class="cd"><div class="cd-expr" id="sce"></div><div class="cd-val" id="scv">0</div></div>
+      <div class="cg cg6" style="gap:6px">
+        <button class="cbtn fn" onclick="csc('deg')" id="sc-deg">DEG</button>
+        <button class="cbtn fn" onclick="csc('sin')">sin</button>
+        <button class="cbtn fn" onclick="csc('cos')">cos</button>
+        <button class="cbtn fn" onclick="csc('tan')">tan</button>
+        <button class="cbtn fn" onclick="csc('π')">π</button>
+        <button class="cbtn fn" onclick="csc('e_const')">e</button>
+        <button class="cbtn fn" onclick="csc('AC')">AC</button>
+        <button class="cbtn fn" onclick="csc('log')">log</button>
+        <button class="cbtn fn" onclick="csc('ln')">ln</button>
+        <button class="cbtn fn" onclick="csc('√')">√</button>
+        <button class="cbtn fn" onclick="csc('x²')">x²</button>
+        <button class="cbtn fn" onclick="csc('xⁿ')">xⁿ</button>
+        <button class="cbtn fn" onclick="csc('(')">( </button>
+        <button class="cbtn fn" onclick="csc(')')"> )</button>
+        <button class="cbtn fn" onclick="csc('1/x')">1/x</button>
+        <button class="cbtn fn" onclick="csc('n!')">n!</button>
+        <button class="cbtn fn" onclick="csc('EE')">EE</button>
+        <button class="cbtn op" onclick="csc('÷')">÷</button>
+        <button class="cbtn" onclick="csc('7')">7</button><button class="cbtn" onclick="csc('8')">8</button><button class="cbtn" onclick="csc('9')">9</button>
+        <button class="cbtn" onclick="csc('4')">4</button><button class="cbtn" onclick="csc('5')">5</button>
+        <button class="cbtn op" onclick="csc('×')">×</button>
+        <button class="cbtn" onclick="csc('6')">6</button>
+        <button class="cbtn" onclick="csc('1')">1</button><button class="cbtn" onclick="csc('2')">2</button><button class="cbtn" onclick="csc('3')">3</button>
+        <button class="cbtn" onclick="csc('0')">0</button>
+        <button class="cbtn op" onclick="csc('−')">−</button>
+        <button class="cbtn" onclick="csc('.')">.</button>
+        <button class="cbtn fn" onclick="csc('±')">±</button>
+        <button class="cbtn fn" onclick="csc('⌫')">⌫</button>
+        <button class="cbtn op" onclick="csc('+')">+</button>
+        <button class="cbtn eq" onclick="csc('=')">=</button>
+        <button class="cbtn fn" onclick="csc('%')">%</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- ALGEBRA -->
+  <div class="calc-view" id="cv-alg">
+    <div class="card"><div class="ch"><span class="ct">Algebra Solver</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">ALGEBRA</span></div>
+    <div class="cb inp-calc">
+      <p style="font-size:0.8rem;color:var(--text2);margin-bottom:10px">Enter an equation with x. Examples: <code style="color:var(--cyan);font-family:monospace">2x+5=11</code> &nbsp; <code style="color:var(--amber);font-family:monospace">x^2-4x+3=0</code> &nbsp; <code style="color:var(--green);font-family:monospace">3*(x-2)=4x+1</code></p>
+      <div class="ic-row">
+        <input class="ic-in" id="alg-in" placeholder="e.g.  3x - 7 = 2x + 5" type="text" oninput="algSolveAuto()" onkeydown="if(event.key==='Enter')algSolveAuto()">
+        <button class="ic-btn" onclick="algSolveAuto()">SOLVE →</button>
+        <button class="ic-btn" style="border-color:rgba(255,0,122,0.3);color:var(--magenta);background:var(--mdim)" onclick="document.getElementById('alg-in').value='';algRes('')">CLR</button>
+      </div>
+      <div class="ic-result empty" id="alg-res">Enter an equation above</div>
+      <div id="alg-steps" style="display:flex;flex-direction:column;gap:7px;margin-top:8px"></div>
+      <div class="sl" style="margin-top:16px">Try these</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        <button class="ai-sug" onclick="algLoad('2x+3=11')">2x+3=11</button>
+        <button class="ai-sug" onclick="algLoad('x^2-5x+6=0')">x²-5x+6=0</button>
+        <button class="ai-sug" onclick="algLoad('3*(x-2)=4x+1')">3(x-2)=4x+1</button>
+        <button class="ai-sug" onclick="algLoad('x^2+4x+4=0')">x²+4x+4=0</button>
+        <button class="ai-sug" onclick="algLoad('5x-3=2x+9')">5x-3=2x+9</button>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- STATISTICS -->
+  <div class="calc-view" id="cv-stat">
+    <div class="card"><div class="ch"><span class="ct">Statistics Calculator</span><span class="cbadge" style="background:var(--vdim);color:var(--violet)">STATS</span></div>
+    <div class="cb inp-calc">
+      <div class="ic-row">
+        <label class="ic-label">Data (comma separated)</label>
+        <input class="ic-in" id="stat-in" placeholder="e.g. 4, 7, 2, 9, 5, 3" type="text" oninput="calcStat()">
+      </div>
+      <div class="ic-result empty" id="stat-res">Enter numbers above</div>
+    </div></div>
+  </div>
+
+  <!-- UNIT CONVERTER -->
+  <div class="calc-view" id="cv-conv">
+    <div class="card"><div class="ch"><span class="ct">Unit Converter</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">CONVERT</span></div>
+    <div class="cb inp-calc">
+      <div class="ic-row">
+        <label class="ic-label">Value</label>
+        <input class="ic-in" id="conv-val" type="number" placeholder="0" oninput="doConv()">
+        <select class="ic-sel" id="conv-from" onchange="doConv()">
+          <optgroup label="Length"><option value="m">meters</option><option value="km">km</option><option value="cm">cm</option><option value="mm">mm</option><option value="in">inches</option><option value="ft">feet</option><option value="yd">yards</option><option value="mi">miles</option></optgroup>
+          <optgroup label="Mass"><option value="kg">kg</option><option value="g">grams</option><option value="lb">pounds</option><option value="oz">ounces</option><option value="mg">mg</option></optgroup>
+          <optgroup label="Volume"><option value="L">liters</option><option value="mL">mL</option><option value="gal">gallons</option><option value="qt">quarts</option><option value="cup">cups</option></optgroup>
+          <optgroup label="Temperature"><option value="C">°C</option><option value="F">°F</option><option value="K">Kelvin</option></optgroup>
+          <optgroup label="Time"><option value="s">seconds</option><option value="min">minutes</option><option value="hr">hours</option><option value="day">days</option><option value="yr">years</option></optgroup>
+          <optgroup label="Energy"><option value="J">joules</option><option value="kJ">kJ</option><option value="cal">calories</option><option value="kcal">kcal</option></optgroup>
+        </select>
+        <span style="color:var(--text3);font-size:1.2rem">→</span>
+        <select class="ic-sel" id="conv-to" onchange="doConv()">
+          <optgroup label="Length"><option value="m">meters</option><option value="km">km</option><option value="cm">cm</option><option value="mm">mm</option><option value="in">inches</option><option value="ft" selected>feet</option><option value="yd">yards</option><option value="mi">miles</option></optgroup>
+          <optgroup label="Mass"><option value="kg">kg</option><option value="g">grams</option><option value="lb">pounds</option><option value="oz">ounces</option><option value="mg">mg</option></optgroup>
+          <optgroup label="Volume"><option value="L">liters</option><option value="mL">mL</option><option value="gal">gallons</option><option value="qt">quarts</option><option value="cup">cups</option></optgroup>
+          <optgroup label="Temperature"><option value="C">°C</option><option value="F">°F</option><option value="K">Kelvin</option></optgroup>
+          <optgroup label="Time"><option value="s">seconds</option><option value="min">minutes</option><option value="hr">hours</option><option value="day">days</option><option value="yr">years</option></optgroup>
+          <optgroup label="Energy"><option value="J">joules</option><option value="kJ">kJ</option><option value="cal">calories</option><option value="kcal">kcal</option></optgroup>
+        </select>
+      </div>
+      <div class="ic-result empty" id="conv-res">Enter a value above</div>
+    </div></div>
+  </div>
+
+  <!-- QUADRATIC -->
+  <div class="calc-view" id="cv-quad">
+    <div class="card"><div class="ch"><span class="ct">Quadratic Formula Solver</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">ax²+bx+c=0</span></div>
+    <div class="cb inp-calc">
+      <div class="ic-row">
+        <label class="ic-label">a =</label><input class="ic-in" id="qa" type="number" value="1" style="max-width:80px" oninput="solveQuad()">
+        <label class="ic-label" style="min-width:40px">b =</label><input class="ic-in" id="qb" type="number" value="-5" style="max-width:80px" oninput="solveQuad()">
+        <label class="ic-label" style="min-width:40px">c =</label><input class="ic-in" id="qc" type="number" value="6" style="max-width:80px" oninput="solveQuad()">
+      </div>
+      <div class="ic-result" id="quad-res">Loading…</div>
+    </div></div>
+  </div>
+
+  <!-- GRADE -->
+  <div class="calc-view" id="cv-grade">
+    <div class="card"><div class="ch"><span class="ct">Grade Calculator</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">GRADES</span></div>
+    <div class="cb inp-calc" id="grade-rows">
+      <div class="ic-row grade-row">
+        <input class="ic-in" placeholder="Assignment name" style="flex:2">
+        <input class="ic-in" type="number" placeholder="Score" style="max-width:70px" oninput="calcGrade()">
+        <input class="ic-in" type="number" placeholder="Max" style="max-width:70px" oninput="calcGrade()">
+        <input class="ic-in" type="number" placeholder="Weight%" style="max-width:80px" oninput="calcGrade()">
+      </div>
+      <div class="ic-row grade-row">
+        <input class="ic-in" placeholder="Assignment name" style="flex:2">
+        <input class="ic-in" type="number" placeholder="Score" style="max-width:70px" oninput="calcGrade()">
+        <input class="ic-in" type="number" placeholder="Max" style="max-width:70px" oninput="calcGrade()">
+        <input class="ic-in" type="number" placeholder="Weight%" style="max-width:80px" oninput="calcGrade()">
+      </div>
+    </div>
+    <div style="padding:0 14px 10px;display:flex;gap:8px">
+      <button class="ic-btn" onclick="addGradeRow()">+ Add Row</button>
+      <button class="ic-btn" onclick="calcGrade()">Calculate</button>
+    </div>
+    <div class="ic-result empty" id="grade-res" style="margin:0 14px 14px">Add scores above</div>
+  </div>
+
+  <!-- TIP / TAX -->
+  <div class="calc-view" id="cv-tip">
+    <div class="card"><div class="ch"><span class="ct">Tip &amp; Tax Calculator</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">MONEY</span></div>
+    <div class="cb inp-calc">
+      <div class="ic-row"><label class="ic-label">Bill Amount $</label><input class="ic-in" id="tip-bill" type="number" placeholder="0.00" oninput="calcTip()"></div>
+      <div class="ic-row"><label class="ic-label">Tip %</label><input class="ic-in" id="tip-pct" type="number" placeholder="18" value="18" oninput="calcTip()"></div>
+      <div class="ic-row"><label class="ic-label">Tax %</label><input class="ic-in" id="tax-pct" type="number" placeholder="7" value="7" oninput="calcTip()"></div>
+      <div class="ic-row"><label class="ic-label">Split</label><input class="ic-in" id="tip-split" type="number" placeholder="1" value="1" oninput="calcTip()"></div>
+      <div class="ic-result empty" id="tip-res">Enter bill amount</div>
+    </div></div>
+  </div>
+</div><!-- /calc -->
+
+<!-- ════════════════════════
+     CHEAT SHEETS
+════════════════════════ -->
+<div class="view" id="view-sheets">
+  <div class="ph"><span class="ph-icon">📋</span><div><div class="ph-title" style="color:var(--green)">Cheat Sheets</div><div class="ph-sub">Quick-reference cards for every subject</div></div><div class="ph-line"></div></div>
+
+  <div class="calc-tabs" id="sheet-tabs">
+    <button class="ctab active" onclick="switchSheet('math-s',this)">Math</button>
+    <button class="ctab" onclick="switchSheet('ela-s',this)">ELA</button>
+    <button class="ctab" onclick="switchSheet('sci-s',this)">Science</button>
+    <button class="ctab" onclick="switchSheet('chem-s',this)">Chemistry</button>
+    <button class="ctab" onclick="switchSheet('phys-s',this)">Physics</button>
+    <button class="ctab" onclick="switchSheet('bio-s',this)">Biology</button>
+    <button class="ctab" onclick="switchSheet('hist-s',this)">History</button>
+    <button class="ctab" onclick="switchSheet('cs-s',this)">CS</button>
+    <button class="ctab" onclick="switchSheet('calc-s',this)">Calculus</button>
+  </div>
+
+  <!-- MATH -->
+  <div class="calc-view active" id="sv-math-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Algebra Essentials</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">ALG</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Quadratic Formula</span><span class="fe hl">x = (−b ± √(b²−4ac)) / 2a</span></li>
+        <li class="fi"><span class="fn">Slope Formula</span><span class="fe">m = (y₂−y₁) / (x₂−x₁)</span></li>
+        <li class="fi"><span class="fn">Slope-Intercept</span><span class="fe">y = mx + b</span></li>
+        <li class="fi"><span class="fn">FOIL</span><span class="fe">(a+b)(c+d) = ac+ad+bc+bd</span></li>
+        <li class="fi"><span class="fn">Difference of Squares</span><span class="fe">a²−b² = (a+b)(a−b)</span></li>
+        <li class="fi"><span class="fn">Perfect Square</span><span class="fe">(a±b)² = a²±2ab+b²</span></li>
+        <li class="fi"><span class="fn">Discriminant</span><span class="fe">b²−4ac: >0 two roots, =0 one, &lt;0 none</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Geometry</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">GEO</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Circle Area / Circumference</span><span class="fe">A = πr²  |  C = 2πr</span></li>
+        <li class="fi"><span class="fn">Triangle Area</span><span class="fe">A = ½bh</span></li>
+        <li class="fi"><span class="fn">Pythagorean Theorem</span><span class="fe">a² + b² = c²</span></li>
+        <li class="fi"><span class="fn">Cylinder V &amp; SA</span><span class="fe">V=πr²h  |  SA=2πr²+2πrh</span></li>
+        <li class="fi"><span class="fn">Cone V</span><span class="fe">V = ⅓πr²h</span></li>
+        <li class="fi"><span class="fn">Sphere V &amp; SA</span><span class="fe">V=⁴⁄₃πr³  |  SA=4πr²</span></li>
+        <li class="fi"><span class="fn">30-60-90 Triangle</span><span class="fe">x : x√3 : 2x</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Exponent &amp; Log Rules</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">EXP</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Product Rule</span><span class="fe">aᵐ · aⁿ = aᵐ⁺ⁿ</span></li>
+        <li class="fi"><span class="fn">Quotient Rule</span><span class="fe">aᵐ / aⁿ = aᵐ⁻ⁿ</span></li>
+        <li class="fi"><span class="fn">Power Rule</span><span class="fe">(aᵐ)ⁿ = aᵐⁿ</span></li>
+        <li class="fi"><span class="fn">Negative Exponent</span><span class="fe">a⁻ⁿ = 1/aⁿ</span></li>
+        <li class="fi"><span class="fn">Log Product</span><span class="fe">log(xy) = log x + log y</span></li>
+        <li class="fi"><span class="fn">Log Quotient</span><span class="fe">log(x/y) = log x − log y</span></li>
+        <li class="fi"><span class="fn">Log Power</span><span class="fe">log(xⁿ) = n·log x</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Trig Identities</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">TRIG</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Pythagorean</span><span class="fe hl">sin²θ + cos²θ = 1</span></li>
+        <li class="fi"><span class="fn">Pythagorean Alt</span><span class="fe">tan²θ+1=sec²θ  |  1+cot²θ=csc²θ</span></li>
+        <li class="fi"><span class="fn">SOH-CAH-TOA</span><span class="fe">sin=O/H  cos=A/H  tan=O/A</span></li>
+        <li class="fi"><span class="fn">Double Angle Sin</span><span class="fe">sin(2θ) = 2 sin θ cos θ</span></li>
+        <li class="fi"><span class="fn">Double Angle Cos</span><span class="fe">cos(2θ) = cos²θ − sin²θ</span></li>
+        <li class="fi"><span class="fn">Common Values</span><span class="fe">sin30°=½  cos60°=½  tan45°=1</span></li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- ELA -->
+  <div class="calc-view" id="sv-ela-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Literary Devices</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">ELA</span></div><div class="cb"><div class="vg">
+        <div class="vi"><div class="vt" style="color:var(--green)">Simile</div><div class="vd">Comparison using "like" or "as"</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Metaphor</div><div class="vd">Direct comparison without like/as</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Alliteration</div><div class="vd">Repeated consonant sounds</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Personification</div><div class="vd">Human traits given to non-human</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Irony</div><div class="vd">Saying the opposite of what's meant</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Foreshadowing</div><div class="vd">Hints about future events</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Hyperbole</div><div class="vd">Extreme exaggeration for effect</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Symbolism</div><div class="vd">Object represents an abstract idea</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Onomatopoeia</div><div class="vd">Words that imitate sounds (bang, buzz)</div></div>
+        <div class="vi"><div class="vt" style="color:var(--green)">Oxymoron</div><div class="vd">Contradictory terms together</div></div>
+      </div></div></div>
+      <div class="card"><div class="ch"><span class="ct">Rhetorical Devices</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">RHETORIC</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Ethos</span><span class="fe">Appeal to credibility / authority</span></li>
+        <li class="fi"><span class="fn">Pathos</span><span class="fe">Appeal to emotion</span></li>
+        <li class="fi"><span class="fn">Logos</span><span class="fe">Appeal to logic and evidence</span></li>
+        <li class="fi"><span class="fn">Anaphora</span><span class="fe">Repetition at start of sentences</span></li>
+        <li class="fi"><span class="fn">Parallelism</span><span class="fe">Similar grammatical structure in series</span></li>
+        <li class="fi"><span class="fn">Chiasmus</span><span class="fe">Reversed structure: A-B, B-A</span></li>
+        <li class="fi"><span class="fn">Antithesis</span><span class="fe">Opposing ideas in parallel structure</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Essay Structure</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">WRITING</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Intro:</strong> Hook → Background → Thesis (specific, arguable claim)</li>
+        <li class="ri"><strong>Body ×3:</strong> Topic sentence → Evidence → Analysis → Transition</li>
+        <li class="ri"><strong>Conclusion:</strong> Restate thesis (new words) → Summarize → Broader meaning</li>
+        <li class="ri"><strong>In-text citation (MLA):</strong> (Author LastName PageNumber)</li>
+        <li class="ri"><strong>PEEL:</strong> Point → Evidence → Explain → Link back</li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Grammar Rules</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">GRAMMAR</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Oxford Comma:</strong> Use a comma before the last item in a series of 3+</li>
+        <li class="ri"><strong>Its vs. It's:</strong> "its" = possessive. "it's" = it is</li>
+        <li class="ri"><strong>There/Their/They're:</strong> location / possession / they are</li>
+        <li class="ri"><strong>Semicolon:</strong> Joins two independent clauses without a conjunction</li>
+        <li class="ri"><strong>Dangling modifier:</strong> Modifier must be next to what it modifies</li>
+        <li class="ri"><strong>Active vs Passive:</strong> "The dog bit the man" vs "The man was bitten"</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- SCIENCE -->
+  <div class="calc-view" id="sv-sci-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Physics Kinematics</span><span class="cbadge" style="background:var(--rdim);color:var(--red)">PHYS</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Big 4 Equations</span><span class="fe hl">v=v₀+at  |  Δx=v₀t+½at²  |  v²=v₀²+2aΔx  |  Δx=½(v₀+v)t</span></li>
+        <li class="fi"><span class="fn">Newton 2nd Law</span><span class="fe">F = ma</span></li>
+        <li class="fi"><span class="fn">Weight</span><span class="fe">W = mg  (g = 9.8 m/s²)</span></li>
+        <li class="fi"><span class="fn">Work &amp; Energy</span><span class="fe">W = Fd·cosθ  |  KE=½mv²  |  PE=mgh</span></li>
+        <li class="fi"><span class="fn">Power</span><span class="fe">P = W/t = Fv</span></li>
+        <li class="fi"><span class="fn">Momentum</span><span class="fe">p = mv  |  Impulse = FΔt = Δp</span></li>
+        <li class="fi"><span class="fn">Waves</span><span class="fe">v = fλ</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Scientific Method</span><span class="cbadge" style="background:var(--vdim);color:var(--violet)">METHOD</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Independent Variable:</strong> What you change. X-axis. The cause.</li>
+        <li class="ri"><strong>Dependent Variable:</strong> What you measure. Y-axis. The effect.</li>
+        <li class="ri"><strong>Control Group:</strong> Baseline — receives no treatment.</li>
+        <li class="ri"><strong>Hypothesis format:</strong> If [IV] then [DV] because [reasoning].</li>
+        <li class="ri"><strong>Order:</strong> Observation → Question → Hypothesis → Experiment → Data → Conclusion</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- CHEMISTRY -->
+  <div class="calc-view" id="sv-chem-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Stoichiometry Roadmap</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">CHEM</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Route:</strong> grams A → moles A → moles B → grams B</li>
+        <li class="ri"><strong>Moles:</strong> moles = mass(g) ÷ molar mass(g/mol)</li>
+        <li class="ri"><strong>Mole ratio:</strong> from coefficients in the balanced equation</li>
+        <li class="ri"><strong>Limiting reagent:</strong> substance that runs out first — controls yield</li>
+        <li class="ri"><strong>% yield:</strong> (actual ÷ theoretical) × 100</li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Gas Laws</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">GASES</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Ideal Gas Law</span><span class="fe hl">PV = nRT  (R=0.0821 L·atm/mol·K)</span></li>
+        <li class="fi"><span class="fn">Boyle's Law</span><span class="fe">P₁V₁ = P₂V₂  (constant T)</span></li>
+        <li class="fi"><span class="fn">Charles's Law</span><span class="fe">V₁/T₁ = V₂/T₂  (constant P)</span></li>
+        <li class="fi"><span class="fn">Gay-Lussac's</span><span class="fe">P₁/T₁ = P₂/T₂  (constant V)</span></li>
+        <li class="fi"><span class="fn">pH</span><span class="fe">pH = −log[H⁺]  |  pH+pOH=14</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Periodic Trends</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">PERIODIC</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Atomic radius:</strong> Increases down a group, decreases across a period (left to right)</li>
+        <li class="ri"><strong>Electronegativity:</strong> Increases up and to the right. Fluorine is highest.</li>
+        <li class="ri"><strong>Ionization energy:</strong> Increases up and to the right.</li>
+        <li class="ri"><strong>Metal character:</strong> Increases down and to the left.</li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Common Constants</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">CONST</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Avogadro</span><span class="fe">6.022 × 10²³ mol⁻¹</span></li>
+        <li class="fi"><span class="fn">Gas Constant R</span><span class="fe">8.314 J/mol·K  |  0.0821 L·atm/mol·K</span></li>
+        <li class="fi"><span class="fn">Speed of Light</span><span class="fe">3.00 × 10⁸ m/s</span></li>
+        <li class="fi"><span class="fn">Planck's Constant</span><span class="fe">6.626 × 10⁻³⁴ J·s</span></li>
+        <li class="fi"><span class="fn">Faraday's Constant</span><span class="fe">96,485 C/mol</span></li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- PHYSICS -->
+  <div class="calc-view" id="sv-phys-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Electricity</span><span class="cbadge" style="background:var(--rdim);color:var(--red)">ELEC</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Ohm's Law</span><span class="fe hl">V = IR</span></li>
+        <li class="fi"><span class="fn">Power</span><span class="fe">P = IV = I²R = V²/R</span></li>
+        <li class="fi"><span class="fn">Series Resistance</span><span class="fe">R_total = R₁+R₂+…</span></li>
+        <li class="fi"><span class="fn">Parallel Resistance</span><span class="fe">1/R_total = 1/R₁+1/R₂+…</span></li>
+        <li class="fi"><span class="fn">Coulomb's Law</span><span class="fe">F = kq₁q₂/r²  (k=9×10⁹)</span></li>
+        <li class="fi"><span class="fn">Capacitance</span><span class="fe">C = Q/V</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Waves &amp; Optics</span><span class="cbadge" style="background:var(--rdim);color:var(--red)">WAVES</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Wave Speed</span><span class="fe">v = fλ</span></li>
+        <li class="fi"><span class="fn">Period &amp; Frequency</span><span class="fe">T = 1/f</span></li>
+        <li class="fi"><span class="fn">Snell's Law</span><span class="fe">n₁sin θ₁ = n₂sin θ₂</span></li>
+        <li class="fi"><span class="fn">Thin Lens</span><span class="fe">1/f = 1/dₒ + 1/dᵢ</span></li>
+        <li class="fi"><span class="fn">Doppler Effect</span><span class="fe">f' = f(v±vₒ)/(v∓vₛ)</span></li>
+        <li class="fi"><span class="fn">Photon Energy</span><span class="fe">E = hf = hc/λ</span></li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- BIOLOGY -->
+  <div class="calc-view" id="sv-bio-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Cell Processes</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">BIO</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Photosynthesis</span><span class="fe hl">6CO₂+6H₂O+light → C₆H₁₂O₆+6O₂</span></li>
+        <li class="fi"><span class="fn">Cellular Respiration</span><span class="fe">C₆H₁₂O₆+6O₂ → 6CO₂+6H₂O+ATP</span></li>
+        <li class="fi"><span class="fn">ATP Yield</span><span class="fe">~36–38 ATP per glucose (aerobic)</span></li>
+        <li class="fi"><span class="fn">Mitosis Phases</span><span class="fe">PMAT: Prophase→Metaphase→Anaphase→Telophase</span></li>
+        <li class="fi"><span class="fn">Meiosis</span><span class="fe">2 divisions → 4 haploid daughter cells</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Genetics</span><span class="cbadge" style="background:var(--gdim);color:var(--green)">GENETICS</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>Dominant vs Recessive:</strong> Dominant (A) masks recessive (a). aa = recessive phenotype.</li>
+        <li class="ri"><strong>Punnett square:</strong> Cross two genotypes to predict offspring ratios.</li>
+        <li class="ri"><strong>Monohybrid cross (Aa × Aa):</strong> 3:1 dominant:recessive phenotype ratio.</li>
+        <li class="ri"><strong>Hardy-Weinberg:</strong> p²+2pq+q² = 1  |  p+q = 1</li>
+        <li class="ri"><strong>DNA → RNA → Protein:</strong> Transcription then Translation</li>
+        <li class="ri"><strong>Codons:</strong> 3 nucleotide sequence codes for 1 amino acid. 64 possible codons.</li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="calc-view" id="sv-hist-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">US History Key Dates</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">US</span></div><div class="cb"><table class="rt"><thead><tr><th>Year</th><th>Event</th></tr></thead><tbody>
+        <tr><td>1607</td><td>Jamestown founded (first permanent English settlement)</td></tr>
+        <tr><td>1776</td><td>Declaration of Independence signed</td></tr>
+        <tr><td>1787</td><td>US Constitution written</td></tr>
+        <tr><td>1861–65</td><td>American Civil War</td></tr>
+        <tr><td>1865</td><td>13th Amendment — slavery abolished</td></tr>
+        <tr><td>1920</td><td>19th Amendment — women's suffrage</td></tr>
+        <tr><td>1929</td><td>Great Depression begins (stock market crash)</td></tr>
+        <tr><td>1941</td><td>US enters WWII (Pearl Harbor)</td></tr>
+        <tr><td>1964</td><td>Civil Rights Act signed</td></tr>
+        <tr><td>1969</td><td>Moon landing (Apollo 11)</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">World History</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">WORLD</span></div><div class="cb"><table class="rt"><thead><tr><th>Event</th><th>Key Facts</th></tr></thead><tbody>
+        <tr><td>WWI (1914–18)</td><td>Allies vs Central Powers. Sparked by Franz Ferdinand assassination. Trench warfare.</td></tr>
+        <tr><td>Russian Rev. (1917)</td><td>Czar overthrown. Bolsheviks seize power. USSR formed.</td></tr>
+        <tr><td>WWII (1939–45)</td><td>Allies vs Axis. Holocaust. Atomic bombs on Japan.</td></tr>
+        <tr><td>Cold War (1947–91)</td><td>US vs USSR. Nuclear arms race. Space race. Berlin Wall.</td></tr>
+        <tr><td>Fall of Berlin Wall</td><td>1989 — symbolic end of Cold War</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">US Government</span><span class="cbadge" style="background:var(--adim);color:var(--amber)">GOV</span></div><div class="cb"><div class="vg">
+        <div class="vi"><div class="vt" style="color:var(--amber)">Legislative</div><div class="vd">Congress (Senate + House). Makes laws.</div></div>
+        <div class="vi"><div class="vt" style="color:var(--amber)">Executive</div><div class="vd">President + Cabinet. Enforces laws.</div></div>
+        <div class="vi"><div class="vt" style="color:var(--amber)">Judicial</div><div class="vd">Supreme Court. Interprets laws.</div></div>
+        <div class="vi"><div class="vt" style="color:var(--amber)">Bill of Rights</div><div class="vd">First 10 Amendments. Protects individual freedoms.</div></div>
+        <div class="vi"><div class="vt" style="color:var(--amber)">Checks &amp; Balances</div><div class="vd">Each branch can limit the other two.</div></div>
+        <div class="vi"><div class="vt" style="color:var(--amber)">Electoral College</div><div class="vd">538 electors. 270 needed to win presidency.</div></div>
+      </div></div></div>
+    </div>
+  </div>
+
+  <!-- CS -->
+  <div class="calc-view" id="sv-cs-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Big O Complexity</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">CS</span></div><div class="cb"><table class="rt"><thead><tr><th>Notation</th><th>Name</th><th>Example</th></tr></thead><tbody>
+        <tr><td>O(1)</td><td>Constant</td><td>Array index access</td></tr>
+        <tr><td>O(log n)</td><td>Logarithmic</td><td>Binary search</td></tr>
+        <tr><td>O(n)</td><td>Linear</td><td>Linear scan</td></tr>
+        <tr><td>O(n log n)</td><td>Linearithmic</td><td>Merge sort</td></tr>
+        <tr><td>O(n²)</td><td>Quadratic</td><td>Bubble sort</td></tr>
+        <tr><td>O(2ⁿ)</td><td>Exponential</td><td>Naive recursion</td></tr>
+      </tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">Python Quick Ref</span><span class="cbadge" style="background:var(--cdim);color:var(--cyan)">PYTHON</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">List comprehension</span><span class="fe">[x*2 for x in lst if x > 0]</span></li>
+        <li class="fi"><span class="fn">Lambda</span><span class="fe">f = lambda x: x**2</span></li>
+        <li class="fi"><span class="fn">Dictionary</span><span class="fe">d = {'key': val}  |  d.get('k', default)</span></li>
+        <li class="fi"><span class="fn">String format</span><span class="fe">f"Hello {name}, you are {age}"</span></li>
+        <li class="fi"><span class="fn">Try/Except</span><span class="fe">try: ... except ValueError as e: ...</span></li>
+        <li class="fi"><span class="fn">Range</span><span class="fe">range(start, stop, step)</span></li>
+      </ul></div></div>
+    </div>
+  </div>
+
+  <!-- CALCULUS -->
+  <div class="calc-view" id="sv-calc-s">
+    <div class="grid g2">
+      <div class="card"><div class="ch"><span class="ct">Derivative Rules</span><span class="cbadge" style="background:var(--mdim);color:var(--magenta)">CALC</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Power Rule</span><span class="fe hl">d/dx[xⁿ] = nxⁿ⁻¹</span></li>
+        <li class="fi"><span class="fn">Chain Rule</span><span class="fe">d/dx[f(g(x))] = f'(g(x))·g'(x)</span></li>
+        <li class="fi"><span class="fn">Product Rule</span><span class="fe">d/dx[uv] = u'v + uv'</span></li>
+        <li class="fi"><span class="fn">Quotient Rule</span><span class="fe">d/dx[u/v] = (u'v − uv') / v²</span></li>
+        <li class="fi"><span class="fn">d/dx sin, cos</span><span class="fe">d/dx[sin x]=cos x  |  d/dx[cos x]=−sin x</span></li>
+        <li class="fi"><span class="fn">d/dx eˣ, ln x</span><span class="fe">d/dx[eˣ]=eˣ  |  d/dx[ln x]=1/x</span></li>
+        <li class="fi"><span class="fn">Implicit Diff</span><span class="fe">Differentiate both sides, solve for dy/dx</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Integral Rules</span><span class="cbadge" style="background:var(--mdim);color:var(--magenta)">INTEGRALS</span></div><div class="cb"><ul class="fl">
+        <li class="fi"><span class="fn">Power Rule</span><span class="fe hl">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</span></li>
+        <li class="fi"><span class="fn">∫eˣ dx</span><span class="fe">eˣ + C</span></li>
+        <li class="fi"><span class="fn">∫1/x dx</span><span class="fe">ln|x| + C</span></li>
+        <li class="fi"><span class="fn">∫sin x dx</span><span class="fe">−cos x + C</span></li>
+        <li class="fi"><span class="fn">∫cos x dx</span><span class="fe">sin x + C</span></li>
+        <li class="fi"><span class="fn">FTC</span><span class="fe">∫ₐᵇ f(x)dx = F(b) − F(a)</span></li>
+        <li class="fi"><span class="fn">U-Substitution</span><span class="fe">Let u=g(x), du=g'(x)dx, rewrite ∫</span></li>
+      </ul></div></div>
+      <div class="card"><div class="ch"><span class="ct">Limits</span><span class="cbadge" style="background:var(--mdim);color:var(--magenta)">LIMITS</span></div><div class="cb"><ul class="rl">
+        <li class="ri"><strong>L'Hôpital's Rule:</strong> If 0/0 or ∞/∞, take derivative of top and bottom separately.</li>
+        <li class="ri"><strong>lim(x→0) sin(x)/x = 1</strong></li>
+        <li class="ri"><strong>Continuity:</strong> f is continuous at a if lim(x→a) f(x) = f(a)</li>
+        <li class="ri"><strong>Squeeze Theorem:</strong> If g(x) ≤ f(x) ≤ h(x) and g,h → L then f → L</li>
+      </ul></div></div>
+    </div>
+  </div>
+</div><!-- /sheets -->
+
+<!-- ════════════════════════
+     QUIZ VIEW
+════════════════════════ -->
+<div class="view" id="view-quiz">
+  <div class="ph"><span class="ph-icon">❓</span><div><div class="ph-title" style="color:var(--magenta)">Practice Quizzes</div><div class="ph-sub">Test yourself across every subject</div></div><div class="ph-line"></div></div>
+  <div class="quiz-area">
+    <div id="quiz-selector">
+      <div class="quiz-sel-grid" id="quiz-sel-grid"></div>
+    </div>
+    <div class="quiz-active-area" id="quiz-active">
+      <button class="quiz-back" onclick="exitQuiz()">← Back to subjects</button>
+      <div class="qprogbar"><div class="qproginner" id="qprog" style="width:0%"></div></div>
+      <div id="quiz-content"></div>
+      <div class="qscore" id="quiz-final" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════
+     FACTS VIEW
+════════════════════════ -->
+<div class="view" id="view-facts">
+  <div class="ph"><span class="ph-icon">💡</span><div><div class="ph-title" style="color:var(--violet)">Did You Know?</div><div class="ph-sub">Interesting facts across every subject</div></div><div class="ph-line"></div></div>
+  <div class="facts-filter" id="facts-filter">
+    <button class="ff-btn active" onclick="filterFacts('all',this)">All</button>
+    <button class="ff-btn" onclick="filterFacts('math',this)">Math</button>
+    <button class="ff-btn" onclick="filterFacts('science',this)">Science</button>
+    <button class="ff-btn" onclick="filterFacts('history',this)">History</button>
+    <button class="ff-btn" onclick="filterFacts('biology',this)">Biology</button>
+    <button class="ff-btn" onclick="filterFacts('chemistry',this)">Chemistry</button>
+    <button class="ff-btn" onclick="filterFacts('physics',this)">Physics</button>
+    <button class="ff-btn" onclick="filterFacts('cs',this)">CS</button>
+    <button class="ff-btn" onclick="filterFacts('ela',this)">ELA</button>
+  </div>
+  <div class="facts-grid" id="facts-grid"></div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /layout -->
+
+<script>
+/* ══ CLOCK ══ */
+function tick(){const n=new Date();document.getElementById('tb-clock').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');}
+setInterval(tick,1000);tick();
+
+/* ══ TOAST ══ */
+let toastT;
+function showToast(msg,c='var(--cyan)'){const t=document.getElementById('toast');t.style.borderLeftColor=c;t.textContent=msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600);}
+
+/* ══ NAV ══ */
+function nav(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  const btn=document.querySelector(`.nav-btn[onclick="nav('${id}')"]`);
+  if(btn)btn.classList.add('active');
+}
+
+/* ══ CALCULATOR TABS ══ */
+function switchCalc(id,btn){
+  document.querySelectorAll('.calc-view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('#view-calc .ctab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cv-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ══ STANDARD CALC ══ */
+const SS={d:'0',e:'',p:null,o:null,n:true};
+function cs(k){
+  const dv=document.getElementById('sv'),de=document.getElementById('se'),s=SS;
+  if(k==='AC'){s.d='0';s.e='';s.p=null;s.o=null;s.n=true;}
+  else if(k==='±'){s.d=String(-parseFloat(s.d));}
+  else if(['+','−','×','÷'].includes(k)){s.p=parseFloat(s.d);s.o=k;s.n=true;s.e=s.d+' '+k;}
+  else if(k==='='){
+    if(s.o&&s.p!==null){const c=parseFloat(s.d);let r;
+    if(s.o==='+')r=s.p+c;else if(s.o==='−')r=s.p-c;else if(s.o==='×')r=s.p*c;else if(s.o==='÷')r=c===0?'Error':s.p/c;
+    s.e=s.e+' '+s.d+' =';s.d=String(+parseFloat(r).toPrecision(12));s.o=null;s.p=null;s.n=true;}
+  }
+  else if(k==='.'){if(s.n){s.d='0.';s.n=false;}else if(!s.d.includes('.'))s.d+='.';}
+  else{if(s.n){s.d=k;s.n=false;}else s.d=s.d==='0'?k:s.d+k;}
+  dv.textContent=s.d;de.textContent=s.e;
+}
+
+/* ══ SCIENTIFIC CALC ══ */
+const SC={e:'',r:'0',deg:true};
+function csc(k){
+  const ve=document.getElementById('sce'),vv=document.getElementById('scv'),s=SC;
+  if(k==='AC'){s.e='';s.r='0';ve.textContent='';vv.textContent='0';return;}
+  if(k==='⌫'){s.e=s.e.slice(0,-1);ve.textContent=s.e;return;}
+  if(k==='deg'){s.deg=!s.deg;document.getElementById('sc-deg').textContent=s.deg?'DEG':'RAD';return;}
+  if(k==='='){
+    try{
+      let ex=s.e.replace(/π/g,'Math.PI').replace(/e_const/g,'Math.E')
+        .replace(/sin\(/g,s.deg?'Math.sin(Math.PI/180*':'Math.sin(')
+        .replace(/cos\(/g,s.deg?'Math.cos(Math.PI/180*':'Math.cos(')
+        .replace(/tan\(/g,s.deg?'Math.tan(Math.PI/180*':'Math.tan(')
+        .replace(/log\(/g,'Math.log10(').replace(/ln\(/g,'Math.log(')
+        .replace(/√\(/g,'Math.sqrt(').replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-')
+        .replace(/(\d+)%/g,'($1/100)');
+      const r=Function('"use strict";return('+ex+')')();
+      s.r=String(+parseFloat(r).toPrecision(12));
+      ve.textContent=s.e+' =';vv.textContent=s.r;s.e=s.r;
+    }catch(e){vv.textContent='Error';s.e='';}
+    return;
+  }
+  const map={sin:'sin(',cos:'cos(',tan:'tan(',log:'log(',ln:'ln(','√':'√(','x²':'^2','xⁿ':'^','1/x':'1/(',EE:'e+','%':'%','e_const':'e','π':'π'};
+  if(k==='n!'){const n=parseInt(s.e);if(!isNaN(n)&&n>=0&&n<=20){let f=1;for(let i=2;i<=n;i++)f*=i;s.e=String(f);}return;}
+  if(k==='±'){s.e=s.e.startsWith('-')?s.e.slice(1):'-'+s.e;}
+  else s.e+=(map[k]!==undefined?map[k]:k);
+  ve.textContent=s.e;vv.textContent=s.e||'0';
+}
+
+/* ══ ALGEBRA SOLVER ══ */
+function algLoad(v){document.getElementById('alg-in').value=v;algSolveAuto();}
+function algRes(txt,err=false){
+  const el=document.getElementById('alg-res');
+  el.className='ic-result'+(txt?'':' empty')+(err?' error':'');
+  el.textContent=txt||'Enter an equation above';
+}
+function algSolveAuto(){
+  const raw=document.getElementById('alg-in').value.trim();
+  const steps=document.getElementById('alg-steps');
+  steps.innerHTML='';
+  if(!raw){algRes('');return;}
+  try{
+    if(!raw.includes('=')){const r=evalMath(raw);algRes('= '+r);return;}
+    const parts=raw.split('=');if(parts.length!==2)throw new Error();
+    const l=parts[0].trim(),r=parts[1].trim();
+    const norm='('+l+')-('+r+')';
+    if(norm.includes('x^2')||norm.includes('x*x')){
+      const f0=evalWithX(norm,0),f1=evalWithX(norm,1),fm1=evalWithX(norm,-1);
+      const c=f0,b=(f1-fm1)/2,a=(f1+fm1)/2-c;
+      const disc=b*b-4*a*c;
+      if(disc<0){algRes('No real solutions (discriminant='+disc.toFixed(3)+'<0)');return;}
+      if(Math.abs(disc)<1e-10){algRes('One solution:\nx = '+(-b/(2*a)).toFixed(6));return;}
+      const x1=(-b+Math.sqrt(disc))/(2*a),x2=(-b-Math.sqrt(disc))/(2*a);
+      algRes('Two solutions:\nx₁ = '+roundN(x1)+'\nx₂ = '+roundN(x2));
+      steps.innerHTML=stepsHTML('Quadratic',a,b,c,disc,x1,x2);
+    }else if(norm.includes('x')){
+      const f0=evalWithX(norm,0),f1=evalWithX(norm,1);
+      const a=f1-f0,bv=f0;
+      if(Math.abs(a)<1e-10){algRes(Math.abs(bv)<1e-10?'Infinite solutions (identity)':'No solution (contradiction)');return;}
+      const x=-bv/a;
+      algRes('x = '+roundN(x));
+      steps.innerHTML=linStepsHTML(l,r,a,bv,x);
+    }else{
+      const L=evalMath(l),R=evalMath(r);
+      algRes(Math.abs(L-R)<1e-10?'✓ True: both sides = '+L:'✗ False: '+L+' ≠ '+R);
+    }
+  }catch(e){algRes('⚠ Could not parse. Check syntax.',true);}
+}
+function evalMath(e){return Function('"use strict";return('+e.replace(/\^/g,'**').replace(/−/g,'-').replace(/×/g,'*').replace(/÷/g,'/').replace(/π/g,'Math.PI')+')')();}
+function evalWithX(e,x){return Function('"use strict";const x='+x+';return('+e.replace(/\^/g,'**').replace(/−/g,'-').replace(/×/g,'*').replace(/÷/g,'/')+')')();}
+function roundN(v){return Math.abs(v-Math.round(v))<1e-9?Math.round(v):+parseFloat(v).toPrecision(10);}
+function stepsHTML(t,a,b,c,d,x1,x2){return `<div style="display:flex;flex-direction:column;gap:6px">
+  <div style="background:var(--surface2);border-left:2px solid var(--amber);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--amber)">Step 1</strong> — Identified: a=${roundN(a)}, b=${roundN(b)}, c=${roundN(c)}</div>
+  <div style="background:var(--surface2);border-left:2px solid var(--amber);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--amber)">Step 2</strong> — Discriminant: b²−4ac = ${roundN(b*b)}−${roundN(4*a*c)} = <strong style="color:var(--cyan)">${roundN(d)}</strong></div>
+  <div style="background:var(--surface2);border-left:2px solid var(--green);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--green)">Result</strong> — x₁ = ${roundN(x1)}, x₂ = ${roundN(x2)}</div>
+</div>`;}
+function linStepsHTML(l,r,a,b,x){return `<div style="display:flex;flex-direction:column;gap:6px">
+  <div style="background:var(--surface2);border-left:2px solid var(--amber);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--amber)">Step 1</strong> — Rearranged to: ${l} − (${r}) = 0</div>
+  <div style="background:var(--surface2);border-left:2px solid var(--amber);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--amber)">Step 2</strong> — Coefficient of x: ${roundN(a)}, Constant: ${roundN(b)}</div>
+  <div style="background:var(--surface2);border-left:2px solid var(--green);padding:8px 12px;border-radius:0 5px 5px 0;font-size:0.82rem;color:var(--text2)"><strong style="color:var(--green)">Step 3</strong> — x = −(${roundN(b)})/(${roundN(a)}) = <strong style="color:var(--cyan)">${roundN(x)}</strong></div>
+</div>`;}
+
+/* ══ STATS ══ */
+function calcStat(){
+  const raw=document.getElementById('stat-in').value;
+  const nums=raw.split(',').map(s=>parseFloat(s.trim())).filter(n=>!isNaN(n));
+  const el=document.getElementById('stat-res');
+  if(!nums.length){el.className='ic-result empty';el.textContent='Enter numbers above';return;}
+  el.className='ic-result';
+  const n=nums.length,sum=nums.reduce((a,b)=>a+b,0),mean=sum/n;
+  const sorted=[...nums].sort((a,b)=>a-b);
+  const med=n%2===0?(sorted[n/2-1]+sorted[n/2])/2:sorted[Math.floor(n/2)];
+  const variance=nums.reduce((a,b)=>a+(b-mean)**2,0)/(n-1);
+  const sd=Math.sqrt(variance);
+  const min=sorted[0],max=sorted[n-1],range=max-min;
+  // mode
+  const freq={};nums.forEach(v=>freq[v]=(freq[v]||0)+1);
+  const maxF=Math.max(...Object.values(freq));
+  const modes=Object.keys(freq).filter(k=>freq[k]===maxF).map(Number);
+  el.textContent=`n = ${n}
+Sum = ${roundN(sum)}
+Mean = ${roundN(mean)}
+Median = ${roundN(med)}
+Mode = ${modes.join(', ')} (freq=${maxF})
+Std Dev = ${roundN(sd)}
+Variance = ${roundN(variance)}
+Min = ${min} | Max = ${max} | Range = ${range}
+Q1 = ${roundN(sorted[Math.floor(n/4)])} | Q3 = ${roundN(sorted[Math.floor(3*n/4)])}`;
+}
+
+/* ══ UNIT CONVERTER ══ */
+const toM={m:1,km:1e3,cm:0.01,mm:0.001,in:0.0254,ft:0.3048,yd:0.9144,mi:1609.344};
+const toKg={kg:1,g:0.001,lb:0.453592,oz:0.0283495,mg:1e-6};
+const toL={L:1,mL:0.001,gal:3.78541,qt:0.946353,cup:0.236588};
+const toS={s:1,min:60,hr:3600,day:86400,yr:31536000};
+const toJ={J:1,kJ:1e3,cal:4.184,kcal:4184};
+function catOf(u){if(u in toM)return'len';if(u in toKg)return'mass';if(u in toL)return'vol';if(['C','F','K'].includes(u))return'temp';if(u in toS)return'time';if(u in toJ)return'energy';return null;}
+function doConv(){
+  const v=parseFloat(document.getElementById('conv-val').value),f=document.getElementById('conv-from').value,t=document.getElementById('conv-to').value,el=document.getElementById('conv-res');
+  if(isNaN(v)){el.className='ic-result empty';el.textContent='Enter a value above';return;}
+  const cf=catOf(f),ct=catOf(t);
+  el.className='ic-result';
+  if(cf!==ct){el.textContent='Cannot convert between different unit types';return;}
+  let r;
+  if(cf==='temp'){let c;if(f==='C')c=v;else if(f==='F')c=(v-32)*5/9;else c=v-273.15;if(t==='C')r=c;else if(t==='F')r=c*9/5+32;else r=c+273.15;}
+  else{const map={len:toM,mass:toKg,vol:toL,time:toS,energy:toJ}[cf];r=v*map[f]/map[t];}
+  el.textContent=v+' '+f+' = '+roundN(r)+' '+t;
+}
+
+/* ══ QUADRATIC ══ */
+function solveQuad(){
+  const a=+document.getElementById('qa').value||0,b=+document.getElementById('qb').value||0,c=+document.getElementById('qc').value||0,el=document.getElementById('quad-res');
+  if(a===0){el.textContent='a cannot be 0';return;}
+  const d=b*b-4*a*c;
+  let txt=`a=${a}, b=${b}, c=${c}\nDiscriminant = b²−4ac = ${b*b}−${4*a*c} = ${roundN(d)}\n`;
+  if(d<0)txt+=`\nNo real solutions.\nComplex: x = ${roundN(-b/(2*a))} ± ${roundN(Math.sqrt(-d)/(2*a))}i`;
+  else if(Math.abs(d)<1e-10)txt+=`\nOne repeated root:\nx = ${roundN(-b/(2*a))}`;
+  else{const x1=(-b+Math.sqrt(d))/(2*a),x2=(-b-Math.sqrt(d))/(2*a);txt+=`\nx₁ = (−${b}+√${roundN(d)})/(2·${a}) = ${roundN(x1)}\nx₂ = (−${b}−√${roundN(d)})/(2·${a}) = ${roundN(x2)}`;}
+  el.textContent=txt;el.className='ic-result';
+}
+solveQuad();
+
+/* ══ GRADE CALC ══ */
+function addGradeRow(){
+  const div=document.createElement('div');div.className='ic-row grade-row';
+  div.innerHTML='<input class="ic-in" placeholder="Assignment name" style="flex:2"><input class="ic-in" type="number" placeholder="Score" style="max-width:70px" oninput="calcGrade()"><input class="ic-in" type="number" placeholder="Max" style="max-width:70px" oninput="calcGrade()"><input class="ic-in" type="number" placeholder="Weight%" style="max-width:80px" oninput="calcGrade()">';
+  document.getElementById('grade-rows').appendChild(div);
+}
+function calcGrade(){
+  const rows=document.querySelectorAll('.grade-row');let ws=0,ws2=0;
+  rows.forEach(r=>{const ins=[...r.querySelectorAll('input')];const sc=+ins[1].value,mx=+ins[2].value,wt=+ins[3].value;if(sc&&mx&&wt){ws+=(sc/mx)*wt;ws2+=wt;}});
+  const el=document.getElementById('grade-res');
+  if(!ws2){el.className='ic-result empty';el.textContent='Add scores above';return;}
+  const pct=ws/ws2*100;
+  const letter=pct>=90?'A':pct>=80?'B':pct>=70?'C':pct>=60?'D':'F';
+  el.className='ic-result';el.textContent=`Weighted Average: ${pct.toFixed(2)}%\nLetter Grade: ${letter}`;
+}
+
+/* ══ TIP CALC ══ */
+function calcTip(){
+  const b=+document.getElementById('tip-bill').value||0,tp=+document.getElementById('tip-pct').value||0,tx=+document.getElementById('tax-pct').value||0,sp=+document.getElementById('tip-split').value||1,el=document.getElementById('tip-res');
+  if(!b){el.className='ic-result empty';el.textContent='Enter bill amount';return;}
+  const tip=b*tp/100,tax=b*tx/100,total=b+tip+tax,pp=total/sp;
+  el.className='ic-result';el.textContent=`Bill: $${b.toFixed(2)}\nTip (${tp}%): $${tip.toFixed(2)}\nTax (${tx}%): $${tax.toFixed(2)}\nTotal: $${total.toFixed(2)}\nPer Person (÷${sp}): $${pp.toFixed(2)}`;
+}
+
+/* ══ CHEAT SHEET TABS ══ */
+function switchSheet(id,btn){
+  document.querySelectorAll('#view-sheets .calc-view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('#sheet-tabs .ctab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sv-'+id).classList.add('active');btn.classList.add('active');
+}
+
+/* ══════════════════════════════════════
+   AI ASSISTANT — REAL CLAUDE API
+══════════════════════════════════════ */
+let aiContext = "You are ORACLE, an expert academic tutor for all subjects. Answer clearly with step-by-step explanations. Use **bold** for key terms and formulas. Be concise but thorough.";
+let aiHistory = [];
+let aiBusy = false;
+
+function setSubject(btn, id) {
+  document.querySelectorAll('.asbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  aiContext = btn.dataset.ctx;
+  // Update suggestions based on subject
+  const sug = {
+    math: ['Solve: 3x²+2x-5=0','Expand (2x+3)³','Simplify √(48)','Factor: x²-7x+12'],
+    ela: ['Analyze rhetorical devices','What is a thesis statement?','Explain irony types','MLA citation for a website'],
+    sci: ['Explain Newton\'s 3 laws','Water cycle steps','Photosynthesis vs respiration','Scientific method explained'],
+    calc: ['Derivative of x³sin(x)','Integrate ∫x²eˣ dx','L\'Hôpital\'s rule example','Chain rule with example'],
+    bio: ['Mitosis vs meiosis','Explain DNA replication','Hardy-Weinberg equation','Cell organelle functions'],
+    chem: ['Balance: Fe + O₂ → Fe₂O₃','Explain limiting reagent','pH of 0.01M HCl','Hybridization of CH₄'],
+    hist: ['Causes of WWI','Explain Manifest Destiny','Compare Federalists vs Anti-Federalists','Cold War overview'],
+    cs: ['Explain Big O notation','Binary search algorithm','Explain recursion','Stack vs queue'],
+    general: ['Solve: 2x²-5x+3=0','Explain the water cycle','Analyze rhetorical devices','Derivative of x³sin(x)','Mole conversions','Causes of WWI'],
+  };
+  const sugs = sug[id] || sug.general;
+  document.getElementById('ai-sugs').innerHTML = sugs.map(s => `<button class="ai-sug" onclick="fillSug(this)">${s}</button>`).join('');
+  showToast('Subject: ' + btn.textContent.trim(),'var(--cyan)');
+}
+
+function fillSug(btn) {
+  document.getElementById('ai-input').value = btn.textContent;
+  document.getElementById('ai-input').focus();
+}
+
+function addMsg(role, text) {
+  const msgs = document.getElementById('ai-msgs');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  const label = role === 'user' ? 'YOU' : 'ORACLE // AI';
+  div.innerHTML = `<div class="msg-label">${label}</div><div class="msg-bubble">${formatAI(text)}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function formatAI(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/```([\s\S]*?)```/g,'<pre><code>$1</code></pre>')
+    .replace(/\n/g,'<br>');
+}
+
+function showTyping() {
+  const msgs = document.getElementById('ai-msgs');
+  const div = document.createElement('div');
+  div.className = 'msg ai'; div.id = 'typing-msg';
+  div.innerHTML = '<div class="msg-label">ORACLE // THINKING</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() { const t=document.getElementById('typing-msg'); if(t)t.remove(); }
+
+async function sendMessage() {
+  if (aiBusy) return;
+  const inp = document.getElementById('ai-input');
+  const msg = inp.value.trim();
+  if (!msg) return;
+
+  inp.value = '';
+  aiHistory.push({ role: 'user', content: msg });
+  addMsg('user', msg);
+
+  const btn = document.getElementById('ai-send-btn');
+  btn.disabled = true; aiBusy = true;
+  showTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1024,
+        system: aiContext,
+        messages: aiHistory.slice(-12), // keep last 12 for context
+      })
+    });
+
+    const data = await response.json();
+    removeTyping();
+
+    if (data.content && data.content[0]) {
+      const reply = data.content[0].text;
+      aiHistory.push({ role: 'assistant', content: reply });
+      addMsg('ai', reply);
+    } else if (data.error) {
+      addMsg('ai', '⚠ API Error: ' + (data.error.message || 'Unknown error'));
+    }
+  } catch (e) {
+    removeTyping();
+    addMsg('ai', '⚠ Connection error. Make sure you\'re running this on Claude.ai or a page with API access.');
+  }
+
+  btn.disabled = false; aiBusy = false;
+  document.getElementById('ai-msgs').scrollTop = 9999;
+}
+
+// Keyboard shortcut
+document.getElementById('ai-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+
+// Auto-resize textarea
+document.getElementById('ai-input').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+/* ══════════════════════════════════════
+   QUIZ ENGINE
+══════════════════════════════════════ */
+const QUIZ_BANK = {
+  math: { name:'Math', icon:'📐', color:'var(--cyan)',
+    q:[
+      {q:'What is the quadratic formula?',o:['x=(−b±√(b²−4ac))/2a','x=−b/2a','x=b/2a±√c','x=(b±√(b²+4ac))/2a'],a:0,e:'The quadratic formula solves ax²+bx+c=0.'},
+      {q:'Slope of line through (2,4) and (6,12)?',o:['2','3','4','½'],a:0,e:'m=(12-4)/(6-2)=8/4=2'},
+      {q:'What is √144?',o:['12','11','13','14'],a:0,e:'12×12=144'},
+      {q:'Expand (x+3)²',o:['x²+6x+9','x²+9','x²+3x+9','x²+6x+3'],a:0,e:'(a+b)²=a²+2ab+b². Here: x²+2(x)(3)+9=x²+6x+9'},
+      {q:'What does a discriminant < 0 mean?',o:['No real roots','One repeated root','Two real roots','Three roots'],a:0,e:'b²-4ac<0 means no real solutions (complex roots only)'},
+      {q:'Area of a circle with radius 5?',o:['25π','10π','5π','50π'],a:0,e:'A=πr²=π(25)=25π'},
+      {q:'Simplify: aᵐ × aⁿ',o:['aᵐ⁺ⁿ','aᵐⁿ','aᵐ⁻ⁿ','2aᵐⁿ'],a:0,e:'Product rule of exponents: add the exponents'},
+      {q:'Pythagorean triple — legs 3 and 4, hypotenuse?',o:['5','6','7','8'],a:0,e:'3²+4²=9+16=25=5². Classic Pythagorean triple.'},
+    ]},
+  ela: { name:'ELA', icon:'✏️', color:'var(--green)',
+    q:[
+      {q:'What rhetorical appeal uses credibility?',o:['Ethos','Pathos','Logos','Kairos'],a:0,e:'Ethos appeals to the speaker\'s authority and trustworthiness.'},
+      {q:'Which is a simile?',o:['"Her laugh was like music"','"The thunder roared"','"She was a hurricane"','"The sun smiled"'],a:0,e:'Similes use "like" or "as." Metaphors are direct comparisons without those words.'},
+      {q:'What is the main purpose of a thesis statement?',o:['States the central argument','Introduces the topic broadly','Provides supporting evidence','Summarizes the conclusion'],a:0,e:'A thesis presents the specific, arguable claim the essay will prove.'},
+      {q:'What is anaphora?',o:['Repetition at the start of sentences','Repetition at the end','A direct comparison','Exaggeration for effect'],a:0,e:'Anaphora = repetition at the beginning. Epistrophe = repetition at the end.'},
+      {q:'In MLA format, in-text citations look like:',o:['(Smith 42)','(Smith, 2024)','[Smith, 42]','Smith (42)'],a:0,e:'MLA uses: (Author Last Page#). No comma between name and page.'},
+      {q:'What is the term for the central struggle in a story?',o:['Conflict','Theme','Climax','Exposition'],a:0,e:'Conflict is the central struggle — Man vs Man, Man vs Self, Man vs Nature, etc.'},
+    ]},
+  science: { name:'Science', icon:'🔬', color:'var(--violet)',
+    q:[
+      {q:'Newton\'s 2nd Law formula?',o:['F=ma','F=mv','p=mv','W=Fd'],a:0,e:'Force = mass × acceleration. If mass doubles with same F, acceleration halves.'},
+      {q:'Photosynthesis produces:',o:['Glucose + Oxygen','ATP + CO₂','Water + CO₂','Glucose + CO₂'],a:0,e:'6CO₂+6H₂O+light → C₆H₁₂O₆+6O₂. Glucose and oxygen are outputs.'},
+      {q:'What does the independent variable represent?',o:['What you change','What you measure','The control group','The constant'],a:0,e:'The independent variable is what the researcher deliberately changes. Plotted on x-axis.'},
+      {q:'Atmospheric layers from lowest to highest:',o:['Troposphere→Stratosphere→Mesosphere→Thermosphere','Stratosphere→Troposphere→Mesosphere→Thermosphere','Troposphere→Mesosphere→Stratosphere→Thermosphere','Mesosphere→Troposphere→Stratosphere→Thermosphere'],a:0,e:'Remember: The Strong Man\'s Triceps — Tropos, Stratos, Mesos, Thermos, Exo'},
+      {q:'What is the powerhouse of the cell?',o:['Mitochondria','Nucleus','Ribosome','Chloroplast'],a:0,e:'Mitochondria produce ATP through cellular respiration.'},
+      {q:'What gas causes the greenhouse effect most?',o:['CO₂','O₂','N₂','H₂'],a:0,e:'Carbon dioxide (CO₂) is the primary greenhouse gas from human activity.'},
+    ]},
+  chemistry: { name:'Chemistry', icon:'⚗️', color:'var(--amber)',
+    q:[
+      {q:'What is Avogadro\'s number?',o:['6.022×10²³','3.00×10⁸','6.626×10⁻³⁴','1.602×10⁻¹⁹'],a:0,e:'Avogadro\'s number = number of particles in one mole of a substance.'},
+      {q:'pH of a neutral solution at 25°C?',o:['7','0','14','1'],a:0,e:'pH=7 is neutral. Below 7 = acidic. Above 7 = basic/alkaline.'},
+      {q:'Ideal Gas Law?',o:['PV=nRT','PV=mRT','PV=nRT²','P=nRT/V²'],a:0,e:'PV=nRT. P=pressure, V=volume, n=moles, R=0.0821 L·atm/mol·K, T=temp in Kelvin.'},
+      {q:'What type of bond involves electron sharing?',o:['Covalent','Ionic','Metallic','Hydrogen'],a:0,e:'Covalent bonds share electron pairs. Ionic bonds transfer electrons.'},
+      {q:'Stoichiometry "roadmap" order:',o:['grams→moles→moles→grams','moles→grams→moles→grams','grams→grams→moles→moles','moles→moles→grams→grams'],a:0,e:'Always: grams A → moles A (÷ molar mass) → moles B (× ratio) → grams B (× molar mass)'},
+    ]},
+  history: { name:'History', icon:'🌍', color:'var(--amber)',
+    q:[
+      {q:'Year the US Declaration of Independence was signed?',o:['1776','1789','1781','1763'],a:0,e:'July 4, 1776 — the Declaration of Independence was signed in Philadelphia.'},
+      {q:'Which amendment abolished slavery in the US?',o:['13th','14th','15th','1st'],a:0,e:'The 13th Amendment (1865) abolished slavery and involuntary servitude.'},
+      {q:'The main cause of WWI was triggered by:',o:['Assassination of Franz Ferdinand','Sinking of the Lusitania','German invasion of Poland','Treaty of Versailles'],a:0,e:'Archduke Franz Ferdinand\'s assassination in 1914 triggered the chain of alliances.'},
+      {q:'Which side did the US join in WWII?',o:['Allies','Axis','Neutral','Central Powers'],a:0,e:'The US joined the Allied Powers (UK, France, USSR) against the Axis (Germany, Italy, Japan).'},
+      {q:'What was the Cold War?',o:['Political/military tension between US and USSR','A war fought in Arctic conditions','A trade conflict between Europe and Asia','A UN peacekeeping mission'],a:0,e:'The Cold War (1947-1991) was a period of geopolitical tension between the US and USSR, involving nuclear arms race, proxy wars, and ideological conflict.'},
+    ]},
+  biology: { name:'Biology', icon:'🧬', color:'var(--green)',
+    q:[
+      {q:'Hardy-Weinberg equation:',o:['p²+2pq+q²=1','p+q=1 only','p²+q²=1','2pq+p²=1'],a:0,e:'Hardy-Weinberg: p²+2pq+q²=1 where p²=homozygous dominant, 2pq=heterozygous, q²=homozygous recessive'},
+      {q:'Meiosis produces how many daughter cells?',o:['4 haploid','2 diploid','2 haploid','4 diploid'],a:0,e:'Meiosis undergoes 2 divisions → 4 haploid daughter cells (gametes). Mitosis → 2 diploid.'},
+      {q:'Central dogma of biology:',o:['DNA→RNA→Protein','RNA→DNA→Protein','Protein→RNA→DNA','DNA→Protein→RNA'],a:0,e:'DNA is transcribed to mRNA, which is translated into protein. This is the central dogma.'},
+      {q:'What is the function of ribosomes?',o:['Protein synthesis','Energy production','DNA replication','Lipid storage'],a:0,e:'Ribosomes translate mRNA into proteins — they are the site of protein synthesis.'},
+      {q:'A monohybrid cross (Aa × Aa) gives what phenotype ratio?',o:['3:1 dominant:recessive','1:2:1','1:1','2:2'],a:0,e:'Punnett square of Aa×Aa: AA, Aa, Aa, aa = 3 dominant : 1 recessive phenotype.'},
+    ]},
+  calculus: { name:'Calculus', icon:'∫', color:'var(--magenta)',
+    q:[
+      {q:'d/dx of x⁵?',o:['5x⁴','x⁵','5x⁵','4x⁴'],a:0,e:'Power rule: d/dx[xⁿ] = nxⁿ⁻¹. So d/dx[x⁵] = 5x⁴'},
+      {q:'∫x² dx = ?',o:['x³/3 + C','x³ + C','2x + C','3x² + C'],a:0,e:'Reverse power rule: ∫xⁿ dx = xⁿ⁺¹/(n+1) + C'},
+      {q:'When do you use L\'Hôpital\'s rule?',o:['When limit gives 0/0 or ∞/∞','When integrating by parts','When applying chain rule','When factoring polynomials'],a:0,e:'L\'Hôpital\'s: if lim gives 0/0 or ∞/∞, take the derivative of numerator and denominator separately.'},
+      {q:'Chain rule: d/dx[f(g(x))] = ?',o:["f'(g(x))·g'(x)","f'(x)·g'(x)","f(g'(x))","f'(g(x))"],a:0,e:'Chain rule: differentiate the outer function, keep the inner, multiply by derivative of inner.'},
+      {q:'Fundamental Theorem of Calculus:',o:['∫ₐᵇ f(x)dx = F(b)−F(a)','∫f(x)dx = f(x)','d/dx∫f(x)dx = F(x)','∫ₐᵇ f(x)dx = f(b)−f(a)'],a:0,e:'FTC: the definite integral equals F(b)−F(a) where F is the antiderivative of f.'},
+    ]},
+  cs: { name:'CS', icon:'💻', color:'var(--cyan)',
+    q:[
+      {q:'O(log n) describes:',o:['Binary search','Linear search','Bubble sort','Merge sort'],a:0,e:'Binary search halves the search space each step → O(log n) time complexity.'},
+      {q:'A stack uses which principle?',o:['LIFO','FIFO','Random access','Sorted order'],a:0,e:'Stack = Last In, First Out (LIFO). Push adds to top, pop removes from top. Queue = FIFO.'},
+      {q:'What does recursion require to avoid infinite loops?',o:['A base case','A return type','A loop counter','An array'],a:0,e:'Recursion needs a base case — a condition where it stops calling itself.'},
+      {q:'What does O(n²) typically indicate?',o:['Nested loops','Single loop','Constant time','Logarithmic time'],a:0,e:'O(n²) usually means a loop inside a loop — each element compared to all others.'},
+      {q:'What is a binary tree?',o:['Each node has ≤2 children','A sorted array','A two-dimensional array','A doubly linked list'],a:0,e:'In a binary tree, each node has at most 2 children (left and right).'},
+    ]},
+};
+
+let currentQuiz = null;
+let quizIdx = 0;
+let quizScore = 0;
+
+// Build selector grid
+const selGrid = document.getElementById('quiz-sel-grid');
+Object.entries(QUIZ_BANK).forEach(([id, quiz]) => {
+  const card = document.createElement('div');
+  card.className = 'qs-card';
+  card.style.borderTopColor = quiz.color;
+  card.innerHTML = `<div class="qs-icon">${quiz.icon}</div><div class="qs-name">${quiz.name}</div><div class="qs-count">${quiz.q.length} questions</div>`;
+  card.addEventListener('click', () => startQuiz(id));
+  selGrid.appendChild(card);
+});
+
+function startQuiz(id) {
+  currentQuiz = { ...QUIZ_BANK[id], id };
+  quizIdx = 0; quizScore = 0;
+  document.getElementById('quiz-selector').style.display = 'none';
+  document.getElementById('quiz-active').classList.add('show');
+  document.getElementById('quiz-final').style.display = 'none';
+  renderQuestion();
+}
+
+function exitQuiz() {
+  document.getElementById('quiz-selector').style.display = '';
+  document.getElementById('quiz-active').classList.remove('show');
+}
+
+function renderQuestion() {
+  const q = currentQuiz.q[quizIdx];
+  const pct = (quizIdx / currentQuiz.q.length) * 100;
+  document.getElementById('qprog').style.width = pct + '%';
+  document.getElementById('quiz-content').innerHTML = `
+    <div class="qcard">
+      <div class="qnum">Question ${quizIdx+1} of ${currentQuiz.q.length} · ${currentQuiz.name}</div>
+      <div class="qtext">${q.q}</div>
+      <div class="qopts">${q.o.map((o,i)=>`<button class="qopt" onclick="answerQ(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}</div>
+    </div>`;
+}
+
+function answerQ(idx) {
+  const q = currentQuiz.q[quizIdx];
+  document.querySelectorAll('.qopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.a)b.classList.add('correct');
+    else if(i===idx)b.classList.add('wrong');
+  });
+  const correct = idx===q.a;
+  if(correct)quizScore++;
+  const fb=document.createElement('div');
+  fb.className='qfb '+(correct?'ok':'bad');
+  fb.textContent=(correct?'✓ Correct! ':'✗ Incorrect. ')+q.e;
+  const next=document.createElement('button');
+  next.className='qnext';
+  next.textContent=quizIdx+1<currentQuiz.q.length?'Next Question →':'See Results';
+  next.onclick=()=>{quizIdx++;quizIdx<currentQuiz.q.length?renderQuestion():showResults();};
+  document.querySelector('.qcard').append(fb,next);
+}
+
+function showResults() {
+  document.getElementById('qprog').style.width='100%';
+  document.getElementById('quiz-content').innerHTML='';
+  const fin=document.getElementById('quiz-final');
+  const pct=Math.round(quizScore/currentQuiz.q.length*100);
+  fin.style.display='block';
+  fin.innerHTML=`${currentQuiz.icon} Quiz Complete!<br><span>${quizScore}/${currentQuiz.q.length}</span> correct — ${pct}%<br><br><button class="qnext" onclick="startQuiz('${currentQuiz.id}')">↺ Retry</button> <button class="qnext" style="background:var(--surface2);color:var(--text2)" onclick="exitQuiz()">← All Subjects</button>`;
+}
+
+/* ══════════════════════════════════════
+   FACTS
+══════════════════════════════════════ */
+const FACTS = [
+  {cat:'math',col:'var(--cyan)',text:'The number 0 was not considered a "number" by ancient Greeks. The concept of zero as a number originated in India around 628 CE.',src:'Mathematics history'},
+  {cat:'math',col:'var(--cyan)',text:'There are the same number of even numbers as there are counting numbers — both are "countably infinite." (Hilbert\'s Hotel)'},
+  {cat:'math',col:'var(--cyan)',text:'A pizza of radius z and thickness a has volume exactly π·z·z·a — the formula is "pi·zza".'},
+  {cat:'math',col:'var(--cyan)',text:'The sum of all natural numbers (1+2+3+…) can be assigned the value −1/12 using Ramanujan summation in physics.'},
+  {cat:'science',col:'var(--violet)',text:'A teaspoon of neutron star material would weigh about 4 billion tons due to the extreme density of collapsed stellar matter.'},
+  {cat:'science',col:'var(--violet)',text:'Lightning is approximately 5 times hotter than the surface of the sun, reaching 30,000 Kelvin in a fraction of a second.'},
+  {cat:'science',col:'var(--violet)',text:'Sound cannot travel through outer space — there is no medium for compression waves. Explosions in space are completely silent.'},
+  {cat:'science',col:'var(--violet)',text:'The shortest measurable time unit is the Planck time: approximately 5.39 × 10⁻⁴⁴ seconds.'},
+  {cat:'history',col:'var(--amber)',text:'The Great Wall of China is not visible from space with the naked eye — this is a persistent myth debunked by multiple astronauts.'},
+  {cat:'history',col:'var(--amber)',text:'Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid. She was born ~2,500 years after the pyramid was built.'},
+  {cat:'history',col:'var(--amber)',text:'Oxford University is older than the Aztec Empire. Oxford began teaching around 1096 CE; the Aztec Empire wasn\'t founded until 1428 CE.'},
+  {cat:'history',col:'var(--amber)',text:'The Roman Empire never called itself "the Roman Empire." The official name was "Senatus Populusque Romanus" (SPQR) — the Senate and People of Rome.'},
+  {cat:'biology',col:'var(--green)',text:'The human body contains approximately 37.2 trillion cells, but hosts roughly 3.8 × 10¹³ bacterial cells — nearly 1:1 with your own cells.'},
+  {cat:'biology',col:'var(--green)',text:'DNA in a single human cell, if stretched out, would be about 2 meters long. Your body\'s total DNA would stretch from Earth to Pluto and back.'},
+  {cat:'biology',col:'var(--green)',text:'Octopuses have three hearts, blue blood (hemocyanin instead of hemoglobin), and can edit their own RNA without changing their DNA.'},
+  {cat:'biology',col:'var(--green)',text:'Tardigrades can survive the vacuum of space, extreme radiation, and temperatures near absolute zero. They enter a state called "cryptobiosis."'},
+  {cat:'chemistry',col:'var(--amber)',text:'One mole of moles (the animal) would have a mass roughly equal to the mass of the Moon — demonstrating the enormous scale of Avogadro\'s number.'},
+  {cat:'chemistry',col:'var(--amber)',text:'Gallium metal melts at 29.76°C (85.6°F) — meaning it literally melts in your hand on a warm day.'},
+  {cat:'chemistry',col:'var(--amber)',text:'Diamond and graphite are both pure carbon — their entirely different properties result only from how the carbon atoms are arranged.'},
+  {cat:'physics',col:'var(--red)',text:'According to special relativity, if you traveled at 99.9% of the speed of light for 1 year by your clock, ~22 years would pass on Earth.'},
+  {cat:'physics',col:'var(--red)',text:'The Casimir effect demonstrates that "empty" space isn\'t actually empty — virtual particle pairs pop in and out of existence constantly.'},
+  {cat:'physics',col:'var(--red)',text:'A single photon from the Sun takes about 100,000 years to travel from the Sun\'s core to its surface, but only 8 minutes from the surface to Earth.'},
+  {cat:'cs',col:'var(--cyan)',text:'The first computer "bug" was a literal bug — a moth found inside a Harvard Mark II computer in 1947. Grace Hopper\'s team taped it into the logbook.'},
+  {cat:'cs',col:'var(--cyan)',text:'The total data generated by humanity each day (2024) exceeds 2.5 quintillion bytes — more data than existed in all of human history just 20 years ago.'},
+  {cat:'cs',col:'var(--cyan)',text:'The original Apollo 11 guidance computer had 4 KB of RAM and 72 KB of storage. Your phone has roughly 1 billion times more processing power.'},
+  {cat:'ela',col:'var(--green)',text:'"Stewardesses" and "reverberated" are the two longest words in the English language that can be typed using only one hand on a standard keyboard.'},
+  {cat:'ela',col:'var(--green)',text:'Shakespeare invented over 1,700 words still used today, including "bedroom," "lonely," "generous," "obscene," and "zany."'},
+  {cat:'ela',col:'var(--green)',text:'The word "set" has the most definitions in the English language — over 430 distinct meanings in the Oxford English Dictionary.'},
+];
+
+let factsFilter = 'all';
+function filterFacts(cat,btn){
+  factsFilter=cat;
+  document.querySelectorAll('.ff-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFacts();
+}
+function renderFacts(){
+  const grid=document.getElementById('facts-grid');
+  const filtered=FACTS.filter(f=>factsFilter==='all'||f.cat===factsFilter);
+  grid.innerHTML=filtered.map(f=>`<div class="fact-card">
+    <div class="fc-cat" style="color:${f.col}">${f.cat.toUpperCase()}</div>
+    <div class="fc-text">${f.text}</div>
+    ${f.src?`<div class="fc-src">— ${f.src}</div>`:''}
+  </div>`).join('');
+}
+renderFacts();
+</script>
+</body>
+</html>

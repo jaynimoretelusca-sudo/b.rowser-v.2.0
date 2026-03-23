@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS // Search</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void:#040508;--deep:#07090f;--surface:#0c0f1a;--surface2:#111522;--surface3:#161c2e;
+  --panel:#0e1220;--border:#1a2240;--border2:#243060;
+  --cyan:#00e5ff;--cyan-dim:rgba(0,229,255,0.08);--cyan-glow:rgba(0,229,255,0.25);
+  --magenta:#ff007a;--mag-dim:rgba(255,0,122,0.08);
+  --green:#00ff88;--grn-dim:rgba(0,255,136,0.08);
+  --amber:#ffaa00;--amb-dim:rgba(255,170,0,0.08);
+  --violet:#9b5cf6;--vio-dim:rgba(155,92,246,0.1);
+  --text:#c8d8f0;--text2:#6b80a8;--text3:#344060;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  background:var(--void);color:var(--text);
+  font-family:'Rajdhani',sans-serif;font-size:14px;
+  display:flex;flex-direction:column;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%,rgba(0,229,255,0.04) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 60% at 80% 70%,rgba(155,92,246,0.05) 0%,transparent 55%);
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);
+}
+.scan-line{position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.12),transparent);animation:scan 9s linear infinite;pointer-events:none;z-index:3;}
+@keyframes scan{from{transform:translateY(-2px)}to{transform:translateY(100vh)}}
+
+/* ── TOOLBAR ── */
+#toolbar{
+  position:relative;z-index:100;height:46px;
+  background:var(--surface);border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;padding:0 16px;gap:8px;flex-shrink:0;
+  box-shadow:0 2px 20px rgba(0,0,0,0.4);
+}
+#toolbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0.25;}
+.tb-brand{font-family:'Orbitron',monospace;font-weight:900;font-size:0.85rem;color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,0.5);letter-spacing:0.12em;flex-shrink:0;}
+.tb-sep{width:1px;height:22px;background:var(--border2);flex-shrink:0;margin:0 2px;}
+.tb-nav{
+  display:flex;align-items:center;gap:5px;
+  padding:0 12px;height:28px;border-radius:5px;
+  border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text2);font-family:'Orbitron',monospace;
+  font-size:0.52rem;font-weight:700;letter-spacing:0.1em;
+  cursor:pointer;transition:all 0.14s;text-decoration:none;flex-shrink:0;
+}
+.tb-nav:hover{border-color:rgba(0,229,255,0.4);color:var(--cyan);background:var(--cyan-dim);}
+
+/* Search bar in toolbar */
+#tb-search-wrap{
+  flex:1;max-width:500px;height:30px;
+  background:var(--deep);border:1px solid var(--border2);
+  border-radius:6px;display:flex;align-items:center;
+  padding:0 10px;gap:7px;transition:all 0.2s;
+}
+#tb-search-wrap:focus-within{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,229,255,0.1);}
+#tb-search-inp{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:var(--text);caret-color:var(--cyan);
+}
+#tb-search-inp::placeholder{color:var(--text3);}
+.tb-go{
+  height:22px;padding:0 10px;border-radius:4px;
+  border:1px solid rgba(0,229,255,0.3);background:var(--cyan-dim);
+  color:var(--cyan);font-family:'Orbitron',monospace;
+  font-size:0.5rem;font-weight:700;letter-spacing:0.1em;cursor:pointer;
+  transition:all 0.14s;flex-shrink:0;
+}
+.tb-go:hover{background:rgba(0,229,255,0.16);box-shadow:0 0 10px rgba(0,229,255,0.2);}
+
+/* ENGINE SELECTOR */
+.engine-pills{display:flex;gap:4px;flex-shrink:0;}
+.epill{
+  height:26px;padding:0 10px;border-radius:5px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--text3);font-family:'Orbitron',monospace;
+  font-size:0.5rem;font-weight:700;letter-spacing:0.08em;
+  cursor:pointer;transition:all 0.14s;white-space:nowrap;
+}
+.epill:hover{border-color:var(--border2);color:var(--text2);}
+.epill.active{border-color:var(--ep-color,var(--cyan));color:var(--ep-color,var(--cyan));background:var(--ep-bg,rgba(0,229,255,0.07));}
+
+#tb-clock{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);flex-shrink:0;}
+
+/* ── LAYOUT ── */
+#body{position:relative;z-index:2;flex:1;display:flex;overflow:hidden;}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:220px;flex-shrink:0;background:var(--panel);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sb-head{
+  padding:12px 14px 8px;
+  font-family:'Orbitron',monospace;font-size:0.55rem;
+  font-weight:700;letter-spacing:0.14em;color:var(--text3);
+  border-bottom:1px solid var(--border);flex-shrink:0;
+}
+
+#history-list{
+  flex:1;overflow-y:auto;padding:6px 8px;
+  scrollbar-width:thin;scrollbar-color:var(--border2) transparent;
+}
+#history-list::-webkit-scrollbar{width:4px;}
+#history-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+
+.hist-item{
+  display:flex;align-items:center;gap:7px;
+  padding:6px 7px;border-radius:5px;cursor:pointer;
+  border:1px solid transparent;transition:all 0.12s;margin-bottom:2px;
+}
+.hist-item:hover{background:var(--cyan-dim);border-color:rgba(0,229,255,0.1);}
+.hist-icon{font-size:11px;flex-shrink:0;color:var(--text3);}
+.hist-text{font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--text2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hist-clear{width:100%;margin-top:8px;padding:6px;border-radius:5px;border:1px dashed var(--border2);background:transparent;color:var(--text3);font-family:'Share Tech Mono',monospace;font-size:0.6rem;cursor:pointer;transition:all 0.12s;letter-spacing:0.06em;}
+.hist-clear:hover{border-color:var(--magenta);color:var(--magenta);background:var(--mag-dim);}
+
+.sb-quick-head{
+  padding:8px 14px 6px;font-family:'Orbitron',monospace;
+  font-size:0.52rem;font-weight:700;letter-spacing:0.12em;color:var(--text3);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  flex-shrink:0;margin-top:auto;
+}
+#quick-links{padding:6px 8px 10px;flex-shrink:0;}
+.ql-item{
+  display:flex;align-items:center;gap:7px;padding:5px 7px;
+  border-radius:5px;cursor:pointer;border:1px solid transparent;
+  transition:all 0.12s;margin-bottom:2px;
+}
+.ql-item:hover{background:var(--cyan-dim);border-color:rgba(0,229,255,0.1);}
+.ql-label{font-size:0.72rem;color:var(--text2);font-weight:500;}
+
+/* ── MAIN ── */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+
+/* ── VIEW: HOME ── */
+#view-home{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow:auto;
+}
+.home-brand{
+  font-family:'Orbitron',monospace;font-size:clamp(2.5rem,5vw,4.5rem);
+  font-weight:900;color:var(--text);letter-spacing:-0.02em;
+  margin-bottom:4px;text-align:center;
+}
+.home-brand span{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,0.5);}
+.home-sub{font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--text3);letter-spacing:0.2em;margin-bottom:32px;text-align:center;}
+
+.home-search{
+  width:min(560px,90%);height:50px;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:10px;display:flex;align-items:center;
+  padding:0 14px;gap:10px;transition:all 0.2s;margin-bottom:28px;
+}
+.home-search:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.1),0 0 40px rgba(0,229,255,0.07);}
+.hs-i{font-size:15px;color:var(--text3);flex-shrink:0;}
+.hs-inp{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:'Share Tech Mono',monospace;font-size:0.95rem;
+  color:var(--text);caret-color:var(--cyan);
+}
+.hs-inp::placeholder{color:var(--text3);}
+.hs-btn{
+  height:34px;padding:0 18px;border-radius:7px;
+  border:1px solid rgba(0,229,255,0.35);background:var(--cyan-dim);
+  color:var(--cyan);font-family:'Orbitron',monospace;
+  font-size:0.58rem;font-weight:700;letter-spacing:0.1em;
+  cursor:pointer;transition:all 0.15s;flex-shrink:0;
+}
+.hs-btn:hover{background:rgba(0,229,255,0.16);box-shadow:0 0 16px rgba(0,229,255,0.25);}
+
+.engine-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:36px;}
+.er-btn{
+  padding:7px 18px;border-radius:6px;
+  border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text2);font-family:'Orbitron',monospace;
+  font-size:0.56rem;font-weight:700;letter-spacing:0.08em;
+  cursor:pointer;transition:all 0.14s;
+}
+.er-btn.active{border-color:var(--er-color);color:var(--er-color);background:var(--er-bg);}
+.er-btn:hover:not(.active){border-color:var(--border2);color:var(--text);}
+
+.proxy-info{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-left:3px solid var(--amber);border-radius:8px;
+  padding:12px 18px;max-width:560px;width:90%;
+}
+.proxy-title{font-family:'Orbitron',monospace;font-size:0.62rem;font-weight:700;color:var(--amber);letter-spacing:0.1em;margin-bottom:6px;}
+.proxy-text{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text3);line-height:1.7;}
+.proxy-text a{color:var(--cyan);text-decoration:none;}
+.proxy-text a:hover{text-decoration:underline;}
+
+/* Corner decorations */
+.c{position:absolute;width:18px;height:18px;pointer-events:none;opacity:0.3;}
+.c.tl{top:14px;left:14px;border-top:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.c.tr{top:14px;right:14px;border-top:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+.c.bl{bottom:14px;left:14px;border-bottom:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.c.br{bottom:14px;right:14px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+
+/* ── VIEW: RESULTS (iframe) ── */
+#view-results{display:none;flex:1;flex-direction:column;overflow:hidden;}
+#view-results.active{display:flex;}
+
+#results-bar{
+  height:36px;background:var(--surface);border-bottom:1px solid var(--border2);
+  display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;
+}
+#results-url-label{
+  font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text3);
+  flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.rb-btn{
+  height:24px;padding:0 10px;border-radius:4px;
+  border:1px solid var(--border2);background:var(--surface2);
+  color:var(--text2);font-family:'Orbitron',monospace;
+  font-size:0.5rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;
+  transition:all 0.12s;flex-shrink:0;
+}
+.rb-btn:hover{border-color:var(--border2);color:var(--text);}
+.rb-btn.red:hover{border-color:rgba(255,0,122,0.4);color:var(--magenta);background:var(--mag-dim);}
+
+#results-iframe{flex:1;border:none;background:#fff;}
+
+/* ── PROXY URL BUILDERS ── */
+/* We route every search/URL through a proxy base */
+
+/* loading bar */
+#load-bar{
+  position:fixed;top:46px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  width:0%;opacity:0;z-index:200;transition:width 0.2s,opacity 0.3s;
+  box-shadow:0 0 8px var(--cyan);
+}
+
+/* toast */
+#toast{
+  position:fixed;bottom:18px;right:18px;z-index:400;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-left:3px solid var(--cyan);border-radius:8px;
+  padding:10px 16px;font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;color:var(--text2);
+  transform:translateY(60px);opacity:0;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
+}
+#toast.show{transform:translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<div class="scan-line"></div>
+<div id="load-bar"></div>
+<div id="toast"></div>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <span class="tb-brand">NEXUS</span>
+  <div class="tb-sep"></div>
+  <a class="tb-nav" href="browser_home.html">⌂ HOME</a>
+  <a class="tb-nav" href="quickplay.html">⚡ QUICKPLAY!</a>
+  <div class="tb-sep"></div>
+
+  <div id="tb-search-wrap">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--text3);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="tb-search-inp" type="text" placeholder="Search or enter URL…" spellcheck="false">
+    <button class="tb-go" onclick="doSearch()">GO</button>
+  </div>
+
+  <div class="engine-pills">
+    <button class="epill active" style="--ep-color:var(--cyan);--ep-bg:rgba(0,229,255,0.07)" data-eng="google" onclick="setEngine('google',this)">GGL</button>
+    <button class="epill" style="--ep-color:#00aaff;--ep-bg:rgba(0,170,255,0.07)" data-eng="bing" onclick="setEngine('bing',this)">BING</button>
+    <button class="epill" style="--ep-color:#ff6611;--ep-bg:rgba(255,102,17,0.07)" data-eng="ddg" onclick="setEngine('ddg',this)">DDG</button>
+    <button class="epill" style="--ep-color:var(--violet);--ep-bg:rgba(155,92,246,0.07)" data-eng="proxy" onclick="setEngine('proxy',this)">PROXY</button>
+  </div>
+  <div class="tb-sep"></div>
+  <div id="tb-clock"></div>
+</div>
+
+<!-- BODY -->
+<div id="body">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sb-head">// SEARCH HISTORY</div>
+    <div id="history-list">
+      <div id="hist-items"></div>
+      <button class="hist-clear" onclick="clearHistory()">CLEAR HISTORY</button>
+    </div>
+    <div class="sb-quick-head">// QUICK LINKS</div>
+    <div id="quick-links">
+      <div class="ql-item" onclick="navigate('https://study-with.b-cdn.net/')"><span>📚</span><span class="ql-label">Study Hub</span></div>
+      <div class="ql-item" onclick="navigate('https://www.wikipedia.org/')"><span>📖</span><span class="ql-label">Wikipedia</span></div>
+      <div class="ql-item" onclick="navigate('https://www.desmos.com/calculator')"><span>📐</span><span class="ql-label">Desmos</span></div>
+      <div class="ql-item" onclick="navigate('https://www.wolframalpha.com/')"><span>🔬</span><span class="ql-label">Wolfram Alpha</span></div>
+      <div class="ql-item" onclick="navigate('https://www.google.com/maps')"><span>🗺️</span><span class="ql-label">Google Maps</span></div>
+      <div class="ql-item" onclick="navigate('https://translate.google.com/')"><span>🌐</span><span class="ql-label">Translate</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+
+    <!-- HOME VIEW -->
+    <div id="view-home">
+      <div class="c tl"></div><div class="c tr"></div>
+      <div class="c bl"></div><div class="c br"></div>
+
+      <div class="home-brand">NEX<span>US</span></div>
+      <div class="home-sub">// CYBERNETIC SEARCH INTERFACE //</div>
+
+      <div class="home-search">
+        <span class="hs-i">⌕</span>
+        <input class="hs-inp" id="home-inp" type="text" placeholder="Search anything or paste a URL…" spellcheck="false">
+        <button class="hs-btn" onclick="doSearchFromHome()">LAUNCH</button>
+      </div>
+
+      <div class="engine-row" id="home-engine-row">
+        <button class="er-btn active" style="--er-color:var(--cyan);--er-bg:rgba(0,229,255,0.07)" data-eng="google" onclick="setEngineHome('google',this)">🔍 Google</button>
+        <button class="er-btn" style="--er-color:#00aaff;--er-bg:rgba(0,170,255,0.07)" data-eng="bing" onclick="setEngineHome('bing',this)">🔷 Bing</button>
+        <button class="er-btn" style="--er-color:#ff6611;--er-bg:rgba(255,102,17,0.07)" data-eng="ddg" onclick="setEngineHome('ddg',this)">🦆 DuckDuckGo</button>
+        <button class="er-btn" style="--er-color:var(--violet);--er-bg:rgba(155,92,246,0.07)" data-eng="proxy" onclick="setEngineHome('proxy',this)">🔀 Proxy Mode</button>
+      </div>
+
+      <div class="proxy-info">
+        <div class="proxy-title">ℹ HOW NEXUS SEARCH WORKS</div>
+        <div class="proxy-text">
+          Every link and page opened through NEXUS Search is routed through your browser's iframe system — keeping your browsing within NEXUS rather than opening external tabs.<br><br>
+          <strong style="color:var(--amber)">PROXY MODE</strong> routes searches through proxy services that allow more sites to load inside iframes. Use it when normal search results block embedding.<br><br>
+          Direct URLs are opened immediately in the embedded viewer. Search terms are passed to your selected engine.
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS VIEW (iframe) -->
+    <div id="view-results">
+      <div id="results-bar">
+        <span id="rb-lock" style="font-size:11px;flex-shrink:0">🔒</span>
+        <span id="results-url-label">—</span>
+        <button class="rb-btn" onclick="backToHome()">⌂ HOME</button>
+        <button class="rb-btn" onclick="reloadResult()">↻</button>
+        <button class="rb-btn" onclick="openNewProxy()">🔀 PROXY</button>
+        <button class="rb-btn red" onclick="backToHome()">✕ CLOSE</button>
+      </div>
+      <iframe id="results-iframe" id="ri" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation" allowfullscreen></iframe>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── CLOCK ── */
+function tick(){const n=new Date();document.getElementById('tb-clock').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0');}
+setInterval(tick,1000);tick();
+
+/* ── TOAST ── */
+let toastT;
+function toast(msg,color='var(--cyan)'){
+  const t=document.getElementById('toast');
+  t.style.borderLeftColor=color;t.textContent=msg;
+  t.classList.add('show');clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* ── LOAD BAR ── */
+let lt,lw=0;
+function startLoad(){const b=document.getElementById('load-bar');b.style.opacity='1';lw=0;const s=()=>{lw=Math.min(lw+Math.random()*10,85);b.style.width=lw+'%';if(lw<85)lt=setTimeout(s,200);};s();}
+function stopLoad(){clearTimeout(lt);const b=document.getElementById('load-bar');b.style.width='100%';setTimeout(()=>{b.style.opacity='0';b.style.width='0%';},500);}
+
+/* ── ENGINES ── */
+let activeEngine = 'google';
+
+const ENGINES = {
+  google: q => 'https://www.google.com/search?igu=1&q=' + encodeURIComponent(q),
+  bing:   q => 'https://www.bing.com/search?q=' + encodeURIComponent(q),
+  ddg:    q => 'https://duckduckgo.com/?q=' + encodeURIComponent(q),
+  proxy:  q => buildProxy(q),
+};
+
+/* Proxy chain — tries multiple embed-friendly proxies */
+const PROXY_BASES = [
+  url => 'https://area.forwardersoft.com/?url=' + encodeURIComponent(url),
+  url => 'https://area.vm4construction.uk/?url=' + encodeURIComponent(url),
+  url => 'https://area.is-a.software.cdn.cloudflare.net/?url=' + encodeURIComponent(url),
+];
+let proxyIndex = 0;
+
+function buildProxy(query) {
+  // If it looks like a URL, proxy it directly; otherwise proxy a google search
+  let target = query;
+  if (!/^https?:\/\//i.test(query) && !query.includes('.')) {
+    target = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+  } else if (!/^https?:\/\//i.test(query)) {
+    target = 'https://' + query;
+  }
+  return PROXY_BASES[proxyIndex % PROXY_BASES.length](target);
+}
+
+function setEngine(eng, btn) {
+  activeEngine = eng;
+  document.querySelectorAll('.epill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Sync home row
+  document.querySelectorAll('.er-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.eng === eng);
+  });
+}
+
+function setEngineHome(eng, btn) {
+  activeEngine = eng;
+  document.querySelectorAll('.er-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // Sync toolbar pills
+  document.querySelectorAll('.epill').forEach(b => {
+    b.classList.toggle('active', b.dataset.eng === eng);
+  });
+}
+
+/* ── HISTORY ── */
+let history = JSON.parse(localStorage.getItem('nx_search_history') || '[]');
+function saveHistory(q) {
+  history = [q, ...history.filter(h => h !== q)].slice(0, 30);
+  try { localStorage.setItem('nx_search_history', JSON.stringify(history)); } catch(e) {}
+  renderHistory();
+}
+function clearHistory() {
+  history = [];
+  try { localStorage.removeItem('nx_search_history'); } catch(e) {}
+  renderHistory();
+  toast('History cleared', 'var(--magenta)');
+}
+function renderHistory() {
+  const el = document.getElementById('hist-items');
+  if (!history.length) {
+    el.innerHTML = '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.62rem;color:var(--text3);padding:8px 6px;text-align:center">No history yet.</div>';
+    return;
+  }
+  el.innerHTML = history.map(h => `
+    <div class="hist-item" onclick="quickSearch('${h.replace(/'/g,"\\'")}')">
+      <span class="hist-icon">↩</span>
+      <span class="hist-text">${h}</span>
+    </div>
+  `).join('');
+}
+function quickSearch(q) {
+  document.getElementById('home-inp').value = q;
+  document.getElementById('tb-search-inp').value = q;
+  doSearch(q);
+}
+renderHistory();
+
+/* ── NAVIGATION ── */
+const viewHome    = document.getElementById('view-home');
+const viewResults = document.getElementById('view-results');
+const iframe      = document.getElementById('results-iframe');
+const urlLabel    = document.getElementById('results-url-label');
+
+function navigate(url) {
+  if (!url) return;
+  if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+
+  let finalUrl = url;
+  if (activeEngine === 'proxy') {
+    finalUrl = PROXY_BASES[proxyIndex % PROXY_BASES.length](url);
+  }
+
+  iframe.src = finalUrl;
+  urlLabel.textContent = url;
+  document.getElementById('rb-lock').textContent = url.startsWith('https') ? '🔒' : '⚠️';
+  document.getElementById('tb-search-inp').value = url;
+
+  viewHome.style.display = 'none';
+  viewResults.classList.add('active');
+  startLoad();
+  iframe.onload = stopLoad;
+  saveHistory(url);
+  toast('↗ ' + (url.length > 50 ? url.slice(0,50)+'…' : url));
+}
+
+function doSearch(q) {
+  if (typeof q !== 'string') q = document.getElementById('tb-search-inp').value.trim();
+  if (!q) return;
+
+  let url;
+  // Detect if it's a URL
+  if (/^https?:\/\//i.test(q) || (q.includes('.') && !q.includes(' '))) {
+    if (!/^https?:\/\//i.test(q)) q = 'https://' + q;
+    url = activeEngine === 'proxy' ? PROXY_BASES[proxyIndex % PROXY_BASES.length](q) : q;
+  } else {
+    url = ENGINES[activeEngine](q);
+  }
+
+  iframe.src = url;
+  urlLabel.textContent = q;
+  document.getElementById('rb-lock').textContent = url.startsWith('https') ? '🔒' : '⚠️';
+
+  viewHome.style.display = 'none';
+  viewResults.classList.add('active');
+  startLoad();
+  iframe.onload = stopLoad;
+  saveHistory(q);
+  toast('🔍 Searching: ' + q.slice(0,40) + (q.length > 40 ? '…' : ''));
+}
+
+function doSearchFromHome() {
+  const q = document.getElementById('home-inp').value.trim();
+  if (!q) return;
+  document.getElementById('tb-search-inp').value = q;
+  doSearch(q);
+}
+
+function backToHome() {
+  viewResults.classList.remove('active');
+  viewHome.style.display = '';
+  iframe.src = '';
+  urlLabel.textContent = '—';
+  document.getElementById('tb-search-inp').value = '';
+}
+
+function reloadResult() {
+  if (iframe.src) { startLoad(); iframe.src = iframe.src; }
+}
+
+function openNewProxy() {
+  proxyIndex++;
+  const current = urlLabel.textContent;
+  if (current && current !== '—') {
+    const target = /^https?:\/\//i.test(current) ? current : 'https://' + current;
+    const proxyUrl = PROXY_BASES[proxyIndex % PROXY_BASES.length](target);
+    iframe.src = proxyUrl;
+    startLoad(); iframe.onload = stopLoad;
+    toast('🔀 Switching proxy (' + (proxyIndex % PROXY_BASES.length + 1) + '/' + PROXY_BASES.length + ')','var(--violet)');
+  }
+}
+
+/* ── KEYBOARD ── */
+document.getElementById('tb-search-inp').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
+document.getElementById('home-inp').addEventListener('keydown', e => { if(e.key==='Enter') doSearchFromHome(); });
+</script>
+</body>
+</html>
